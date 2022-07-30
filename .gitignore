@@ -17,6 +17,8 @@ lib-cov
 *.gz
 *.swp
 
+.next
+
 pids
 logs
 results
