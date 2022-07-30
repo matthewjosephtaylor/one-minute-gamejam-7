@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import * as S from './styles'
 import Game from '@/game/Game'
 
-import React from 'react'
-
 const GameComponent = () => {
     const canvasRef = useRef<HTMLCanvasElement>()
     const [game, setGame] = useState(null)
