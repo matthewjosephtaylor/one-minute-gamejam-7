@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 
 import React from "react";
+import { DancingCube } from "./DancingCube";
 
 export const App = () => {
   const container = document.createElement('div')
@@ -10,6 +11,4 @@ export const App = () => {
   root.render(<DancingCube />);
 };
 
-export const DancingCube = () => {
-  return <div>Hello cube</div>;
-};
+
