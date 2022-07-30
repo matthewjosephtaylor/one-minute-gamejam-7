@@ -2,14 +2,16 @@ import { useEffect, useRef, useState } from 'react'
 import * as S from './styles'
 import Game from '@/game/Game'
 
-const GameComponent = () => {
-    const canvasRef = useRef()
-    const [game, setGame] = useState(null)
-    const requestRef = useRef()
-    const previousTimeRef = useRef()
+import React from 'react'
 
-    const gameLoop = (time) => {
-        if (previousTimeRef.current != undefined) {
+const GameComponent = () => {
+    const canvasRef = useRef<HTMLCanvasElement>()
+    const [game, setGame] = useState(null)
+    const requestRef = useRef<number>()
+    const previousTimeRef = useRef<number>()
+
+    const gameLoop = (time: number) => {
+        if (previousTimeRef.current !== undefined) {
             const deltaTime = time - previousTimeRef.current
             game?.update(deltaTime)
         }

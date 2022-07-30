@@ -2,16 +2,16 @@ import useGeneralState from '@/state/generalState'
 import { Engine, Scene, MeshBuilder, ArcRotateCamera, Vector3, HemisphericLight, StandardMaterial, Color3 } from '@babylonjs/core'
 
 export default class Game {
-    engine
-    scene
+    engine: Engine
+    scene: Scene
 
-    constructor(canvas) {
+    constructor(canvas: HTMLCanvasElement) {
         console.log('Game Initiated')
         this.engine = new Engine(canvas, true)
         this.scene = new Scene(this.engine)
         this.scene.collisionsEnabled = true
 
-        const box = MeshBuilder.CreateBox('box', {})
+        const box = MeshBuilder.CreateBox('box', { width: 10 })
 
         const camera = new ArcRotateCamera('camera', -Math.PI / 2, Math.PI / 2.5, 15, new Vector3(0, 0, 0))
         camera.attachControl(canvas, true)
@@ -37,7 +37,7 @@ export default class Game {
         })
     }
 
-    update(delta) {
+    update(delta: number) {
         this.scene.render()
     }
 }
