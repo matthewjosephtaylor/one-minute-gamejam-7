@@ -1,1 +1,9 @@
-console.log("hello world!")
+import { App } from "./App";
+
+(() => {
+  try {
+    App();
+  } catch (reason) {
+    console.log(reason);
+  }
+})();
