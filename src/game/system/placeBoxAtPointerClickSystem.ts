@@ -3,18 +3,28 @@ import { toVec3, Vec2, Vec3 } from '../../engine/math'
 import { first, isUndefined, times } from '../../engine/object'
 import { Tick } from '../../engine/tick'
 import { GameWorld } from '../GameWorld'
+import { AddDestructor } from './keyboardHandlerSystem'
 
 /** Example system that places a box where the user clicks */
-export const placeBoxAtPointerClickSystem = ({ world, parent = document.body }: { world: GameWorld; parent?: HTMLElement }) => {
+export const placeBoxAtPointerClickSystem = ({
+    world,
+    parent = document.body,
+    addDestructor
+}: {
+    world: GameWorld
+    parent?: HTMLElement
+    addDestructor: AddDestructor
+}) => {
     const { scene } = world
-    //
     const CLICK_STATE = { position: undefined as Vec2 }
 
-    // TODO cleanup listener or do this some other way
-    parent.addEventListener('pointerdown', (event) => {
+    const pointerDownHandler = (event: PointerEvent) => {
         const { offsetX, offsetY } = event
+        console.log(`${offsetX} ${offsetY}`)
         CLICK_STATE.position = [offsetX, offsetY]
-    })
+    }
+    parent.addEventListener('pointerdown', pointerDownHandler)
+    addDestructor(() => parent.removeEventListener('pointerdown', pointerDownHandler))
 
     return (tick: Tick) => {
         const { position } = CLICK_STATE

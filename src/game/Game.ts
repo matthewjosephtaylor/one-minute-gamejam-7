@@ -30,16 +30,5 @@ export const Game = (canvas: HTMLCanvasElement) => {
             diffuseColor: color
         })
     })
-
-    console.log('Ticker started...')
-
-    return tuple2(
-        Ticks.create({
-            ticker: (tick) => {
-                box.rotate(v3(1, 1, 1), 0.1)
-                scene.render()
-            }
-        }),
-        scene
-    )
+    return scene
 }
