@@ -11,7 +11,8 @@
   },
   "compilerOptions": {
     "paths": {
-        "@/*": ["src/*"]
+        "@/*": ["src/*"],
+        "@mjtdev/*": ["src/engine/*"]
     },
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     /* Basic Options */

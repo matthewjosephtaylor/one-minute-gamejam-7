@@ -1,4 +1,4 @@
-import { Color3 } from '@babylonjs/core'
+// import { Color3 } from '@babylonjs/core'
 
 import * as S from './styles'
 import useGeneralState from '@/state/generalState'
@@ -11,21 +11,21 @@ const Navigation = () => {
             <div>
                 <button
                     onClick={() => {
-                        setColor(new Color3(1, 0, 0))
+                        setColor('red')
                     }}
                 >
                     red
                 </button>
                 <button
                     onClick={() => {
-                        setColor(new Color3(0, 1, 0))
+                        setColor('blue')
                     }}
                 >
                     blue
                 </button>
                 <button
                     onClick={() => {
-                        setColor(new Color3(0, 0, 1))
+                        setColor('green')
                     }}
                 >
                     green
