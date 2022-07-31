@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { Ticks, TickState } from '../../../engine/tick'
+import { useEffect, useRef } from 'react'
+
 import { Game } from '../../../game/Game'
 import { addGameSystems } from '../../../game/system/addGameSystems'
 import { GameWorld } from "../../../game/GameWorld"

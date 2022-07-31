@@ -1,6 +1,7 @@
+import { ArcRotateCamera, HemisphericLight, Scene } from 'babylonjs'
+
 import { Babs } from '@/engine/babs'
 import useGeneralState from '@/state/generalState'
-import { ArcRotateCamera, HemisphericLight, Scene } from 'babylonjs'
 import { Materials } from '../engine/babs/material/Materials'
 import { Meshes } from '../engine/babs/mesh/Meshes'
 import { v3 } from '../engine/babs/v3'
