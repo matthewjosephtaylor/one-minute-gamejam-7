@@ -1,6 +1,7 @@
 import { Tick } from '../../engine/tick'
 import { GameWorld } from '../GameWorld'
-import { PAUSE_KEY } from './KEYBOARD_KEYS'
+import { consumeKey } from './consumeKey'
+import { DEBUG_KEY, PAUSE_KEY } from './KEYBOARD_KEYS'
 
 export type AddDestructor = (destructor: () => void) => void
 
@@ -32,14 +33,14 @@ export const keyboardHandlerSystem = ({
     addDestructor(() => parent.removeEventListener('keyup', removeKeyHandler))
 
     return (tick: Tick) => {
-        const { keys } = KEY_STATE
         const { gameLoop } = world
 
         // basic keyboard controls
-        if (keys.includes(PAUSE_KEY)) {
+        consumeKey(KEY_STATE, PAUSE_KEY, () => {
             gameLoop.running = !gameLoop.running
-            // consume the keypress
-            KEY_STATE.keys = keys.filter((k) => k !== PAUSE_KEY)
-        }
+        })
+        consumeKey(KEY_STATE, DEBUG_KEY, () => {
+            console.log({ world })
+        })
     }
 }
