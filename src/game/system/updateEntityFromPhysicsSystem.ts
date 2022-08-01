@@ -7,7 +7,7 @@ export const updateEntityFromPhysicsSystem = ({ world }: { world: GameWorld }) =
     return (tick: Tick) => {
         const { entities } = world
         entities
-            .filter((e) => e.type === 'bubble')
+            .filter((e) => e.type === 'bubble' || e.type === 'tower')
             .forEach((entity) => {
                 const { physicsBody, mesh } = entity
                 const [x, y] = toVec2(physicsBody.position)

@@ -4,13 +4,13 @@ import { bubbleReachedTopSystem } from './bubbleReachedTopSystem'
 import { bubbleSpawnSystem } from './bubbleSpawnSystem'
 import { AddDestructor } from './keyboardHandlerSystem'
 import { moveEntityToDestinationSystem } from './moveEntityToDestinationSystem'
-import { placeBoxAtPointerClickSystem } from './placeBoxAtPointerClickSystem'
+import { placeTowerAtPointerClickSystem } from './placeTowerAtPointerClickSystem'
 import { updateEntityFromPhysicsSystem } from './updateEntityFromPhysicsSystem'
 import { updatePhysicsSystem } from './updatePhysicsSystem'
 
 export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): Ticker[] => {
     return [
-        placeBoxAtPointerClickSystem({ world, addDestructor }),
+        placeTowerAtPointerClickSystem({ world, addDestructor }),
         moveEntityToDestinationSystem({ world, addDestructor }),
         bubbleSpawnSystem({ world }),
         bubbleReachedTopSystem({ world }),
