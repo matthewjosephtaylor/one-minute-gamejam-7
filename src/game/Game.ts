@@ -1,15 +1,13 @@
 import { ArcRotateCamera, HemisphericLight, Scene } from 'babylonjs'
 
 import { Babs } from '@/engine/babs'
-import useGeneralState from '@/state/generalState'
-import { Materials } from '../engine/babs/material/Materials'
 import { Meshes } from '../engine/babs/mesh/Meshes'
 import { v3 } from '../engine/babs/v3'
 
 export const Game = (canvas: HTMLCanvasElement) => {
     console.log('Game Initiated')
-    const engine = Babs.createEngine({ canvas })
-    const scene = new Scene(engine)
+    const renderEngine = Babs.createEngine({ canvas })
+    const scene = new Scene(renderEngine)
 
     const topDownAlpha = -Math.PI / 2
     const topDownBeta = 0

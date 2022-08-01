@@ -1,5 +1,5 @@
-import { GameEntity } from '../GameEntity'
-import { GameWorld } from '../GameWorld'
+import { GameEntity } from './GameEntity'
+import { GameWorld } from './GameWorld'
 
 export const addEntity = (world: GameWorld, entity: GameEntity) => {
     world.entities.push(entity)

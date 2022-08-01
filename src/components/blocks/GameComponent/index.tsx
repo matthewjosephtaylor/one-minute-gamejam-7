@@ -9,12 +9,19 @@ import { Ticks } from '../../../engine/tick'
 import { addControlSystems } from '../../../game/system/addControlSystems'
 import { setupCameraTopDown } from '../../../game/camera/setupCameraTopDown'
 import { addDebugMeshes } from '../../../game/addDebugMeshes'
+import { Physics } from '../../../engine/physics-2d'
 
 const GameComponent = () => {
     const canvasRef = useRef<HTMLCanvasElement>()
 
     useEffect(() => {
         const scene = Game(canvasRef.current)
+
+        const physicsEngine = Physics.createEngine({
+            gravity: {
+                y: 0.00001
+            }
+        })
 
         // various forms of loops
         const controlLoop = Ticks.create({})
@@ -46,6 +53,7 @@ const GameComponent = () => {
         const world: GameWorld = {
             debug: false,
             scene,
+            physicsEngine,
             unitsWide: 10,
             unitsTall: 10,
             entities: [],
