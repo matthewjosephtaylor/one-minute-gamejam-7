@@ -63,7 +63,7 @@ const GameComponent = () => {
 
     return (
         <S.Game>
-            <canvas ref={canvasRef} />
+            <canvas  ref={canvasRef} />
         </S.Game>
     )
 }
