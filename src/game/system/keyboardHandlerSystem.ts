@@ -2,6 +2,7 @@ import { Tick } from '../../engine/tick'
 import { GameWorld } from '../GameWorld'
 import { consumeKey } from './consumeKey'
 import { DEBUG_KEY, PAUSE_KEY } from './KEYBOARD_KEYS'
+import { toggleDebug } from '../toggleDebug'
 
 export type AddDestructor = (destructor: () => void) => void
 
@@ -40,7 +41,10 @@ export const keyboardHandlerSystem = ({
             gameLoop.running = !gameLoop.running
         })
         consumeKey(KEY_STATE, DEBUG_KEY, () => {
+            toggleDebug(world)
             console.log({ world })
         })
     }
 }
+
+

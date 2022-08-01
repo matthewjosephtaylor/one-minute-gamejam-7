@@ -7,6 +7,7 @@ import * as S from './styles'
 import { AddDestructor } from '../../../game/system/keyboardHandlerSystem'
 import { Ticks } from '../../../engine/tick'
 import { addControlSystems } from '../../../game/system/addControlSystems'
+import { setupCameraTopDown } from '../../../game/camera/setupCameraTopDown'
 
 const GameComponent = () => {
     const canvasRef = useRef<HTMLCanvasElement>()
@@ -42,12 +43,16 @@ const GameComponent = () => {
         }
 
         const world: GameWorld = {
+            debug: false,
             scene,
+            unitsWide: 10,
+            unitsTall: 10,
             entities: [],
             controlLoop,
             gameLoop,
             renderLoop
         }
+        setupCameraTopDown(world)
         gameLoop.tickers.push(...addGameSystems(world, addDestructor))
         controlLoop.tickers.push(...addControlSystems(world, addDestructor))
 

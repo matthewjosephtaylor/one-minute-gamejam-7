@@ -5,8 +5,6 @@ import useGeneralState from '@/state/generalState'
 import { Materials } from '../engine/babs/material/Materials'
 import { Meshes } from '../engine/babs/mesh/Meshes'
 import { v3 } from '../engine/babs/v3'
-import { tuple2 } from '../engine/object'
-import { Ticks } from '../engine/tick'
 
 export const Game = (canvas: HTMLCanvasElement) => {
     console.log('Game Initiated')
@@ -16,8 +14,10 @@ export const Game = (canvas: HTMLCanvasElement) => {
     const box = Meshes.getBox(scene, 'box', {
         material: material.name
     })
-    const camera = new ArcRotateCamera('camera', -Math.PI / 2, Math.PI / 2.5, 15, v3(0, 0, 0))
-    camera.attachControl(canvas, true)
+
+    const topDownAlpha = -Math.PI / 2
+    const topDownBeta = 0
+    const camera = new ArcRotateCamera('camera', topDownAlpha, topDownBeta, 15, v3(0, 0, 0))
     const light = new HemisphericLight('h', v3(0, 1, 0.5), scene)
     light.intensity = 1
 
