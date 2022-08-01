@@ -8,6 +8,7 @@ import { AddDestructor } from '../../../game/system/keyboardHandlerSystem'
 import { Ticks } from '../../../engine/tick'
 import { addControlSystems } from '../../../game/system/addControlSystems'
 import { setupCameraTopDown } from '../../../game/camera/setupCameraTopDown'
+import { addDebugMeshes } from '../../../game/addDebugMeshes'
 
 const GameComponent = () => {
     const canvasRef = useRef<HTMLCanvasElement>()
@@ -50,8 +51,10 @@ const GameComponent = () => {
             entities: [],
             controlLoop,
             gameLoop,
-            renderLoop
+            renderLoop,
+            seed: 0
         }
+        addDebugMeshes(world)
         setupCameraTopDown(world)
         gameLoop.tickers.push(...addGameSystems(world, addDestructor))
         controlLoop.tickers.push(...addControlSystems(world, addDestructor))
@@ -63,7 +66,7 @@ const GameComponent = () => {
 
     return (
         <S.Game>
-            <canvas  ref={canvasRef} />
+            <canvas ref={canvasRef} />
         </S.Game>
     )
 }

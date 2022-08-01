@@ -6,15 +6,15 @@ import { GameWorld } from '../GameWorld'
 import { AddDestructor } from './keyboardHandlerSystem'
 
 export const moveEntityToDestinationSystem = ({ world, addDestructor }: { world: GameWorld; addDestructor: AddDestructor }) => {
-    const { scene, entities } = world
-
     return (tick: Tick) => {
+        const { scene, entities } = world
         const { deltaMs } = tick
         for (const entity of entities) {
             const { mesh, destination } = entity
             if (isUndefined(destination)) {
                 return
             }
+            console.log('moving')
             mesh.position = v3(Maths.lerp3(mesh.position, destination, 0.01))
         }
     }

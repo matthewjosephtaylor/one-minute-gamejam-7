@@ -10,10 +10,6 @@ export const Game = (canvas: HTMLCanvasElement) => {
     console.log('Game Initiated')
     const engine = Babs.createEngine({ canvas })
     const scene = new Scene(engine)
-    const material = Materials.getMaterial(scene, 'material')
-    const box = Meshes.getBox(scene, 'box', {
-        material: material.name
-    })
 
     const topDownAlpha = -Math.PI / 2
     const topDownBeta = 0
@@ -25,10 +21,10 @@ export const Game = (canvas: HTMLCanvasElement) => {
     plane.rotation.x = Math.PI * 0.5
     plane.position.y = -1
 
-    useGeneralState.subscribe(({ color }) => {
-        Materials.updateMaterial(scene, material, {
-            diffuseColor: color
-        })
-    })
+    // useGeneralState.subscribe(({ color }) => {
+    //     Materials.updateMaterial(scene, material, {
+    //         diffuseColor: color
+    //     })
+    // })
     return scene
 }

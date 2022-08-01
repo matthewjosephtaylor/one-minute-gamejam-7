@@ -4,6 +4,7 @@ import { GameEntity } from './GameEntity'
 
 export type GameWorld = {
     scene: Scene
+    seed: number
     debug: boolean
     unitsWide: number
     unitsTall: number
