@@ -4,8 +4,7 @@ import { Babs } from '@/engine/babs'
 import { Meshes } from '../engine/babs/mesh/Meshes'
 import { v3 } from '../engine/babs/v3'
 
-export const Game = (canvas: HTMLCanvasElement) => {
-    console.log('Game Initiated')
+export const createScene = (canvas: HTMLCanvasElement) => {
     const renderEngine = Babs.createEngine({ canvas })
     const scene = new Scene(renderEngine)
 
@@ -19,10 +18,5 @@ export const Game = (canvas: HTMLCanvasElement) => {
     plane.rotation.x = Math.PI * 0.5
     plane.position.y = -1
 
-    // useGeneralState.subscribe(({ color }) => {
-    //     Materials.updateMaterial(scene, material, {
-    //         diffuseColor: color
-    //     })
-    // })
     return scene
 }
