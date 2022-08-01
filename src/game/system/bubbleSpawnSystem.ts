@@ -16,7 +16,7 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
         }
         const mat = Materials.getMaterial(scene, 'bubble-material')
         const random = gameTickRandom(world, tick)
-        if(random() < 0.9) {
+        if (random() < 0.9) {
             return
         }
 
@@ -25,11 +25,10 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
         const x = random() * unitsWide - unitsWide / 2
         const z = unitsTall / 2
 
-        console.log(`spawning ${x} ${z}`)
         const mesh = Meshes.getSphere(scene, id, {
             position: [x, 0, z],
             color: Colors.from('blue').mix(Colors.from('green')).mix(Colors.from('white')).toString(),
-            radius: 0.5,
+            radius: 0.1 + random() * 0.5,
             material: mat.name
         })
 

@@ -14,8 +14,7 @@ export const moveEntityToDestinationSystem = ({ world, addDestructor }: { world:
             if (isUndefined(destination)) {
                 return
             }
-            console.log('moving')
-            mesh.position = v3(Maths.lerp3(mesh.position, destination, 0.01))
+            mesh.position = v3(Maths.lerp3(mesh.position, destination, deltaMs * 0.0003))
         }
     }
 }
