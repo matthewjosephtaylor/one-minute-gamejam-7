@@ -23,10 +23,11 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
 
         const id = `bubble-${Randoms.randomUuid(random)}`
 
-        const x = random() * unitsWide - unitsWide / 2
+        const boardWidth = 7
+        const x = random() * boardWidth - boardWidth / 2
         const z = unitsTall / 2
 
-        const radius = 0.1 + random() * 0.5
+        const radius = 0.1 + random() * 0.3
         const mesh = Meshes.getSphere(scene, id, {
             position: [x, 0, z],
             color: Colors.from('blue').mix(Colors.from('green')).mix(Colors.from('white')).toString(),
@@ -35,8 +36,6 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
         })
 
         // totally made up just to demonstrate destination pathing
-        const randWithinBounds = () => Math.random() * 10 - 5
-        const destination: Vec3 = [randWithinBounds(), 0, -unitsTall / 2]
 
         const physicsBody = Physics.getBodyType(physicsEngine.world, 'circle', id, {
             x,

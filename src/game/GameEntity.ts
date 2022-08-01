@@ -3,7 +3,7 @@ import { Vec3 } from '../engine/math'
 
 import { Body } from 'matter-js'
 
-export type EntityType = 'bubble' | 'tower'
+export type EntityType = 'bubble' | 'tower' | 'peg'
 
 export type GameEntity = {
     id: string
