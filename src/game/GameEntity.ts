@@ -20,5 +20,8 @@ export type GameEntity = {
     cooldownTicks?: number
     fireRateTicks?: number
 
+    // collisions outside of physics
+    collisionRadius?: number
+
     range?: number // how far the tower can shoot
 }

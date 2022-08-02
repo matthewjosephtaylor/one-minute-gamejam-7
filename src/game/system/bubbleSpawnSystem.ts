@@ -49,9 +49,8 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
             id,
             mesh,
             type: 'bubble',
+            collisionRadius: radius,
             physicsBody
         })
     }
 }
-
-

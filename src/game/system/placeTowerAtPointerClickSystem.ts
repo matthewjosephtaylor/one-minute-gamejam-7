@@ -87,6 +87,7 @@ export const placeTowerAtPointerClickSystem = ({
             mesh,
             range: 2,
             type: 'tower',
+            fireRateTicks: 60,
             physicsBody
         })
     }

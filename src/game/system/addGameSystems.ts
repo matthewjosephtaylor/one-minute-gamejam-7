@@ -8,6 +8,7 @@ import { placeTowerAtPointerClickSystem } from './placeTowerAtPointerClickSystem
 import { fireAtBubblesSystem } from './fireAtBubblesSystem'
 import { updateEntityFromPhysicsSystem } from './updateEntityFromPhysicsSystem'
 import { updatePhysicsSystem } from './updatePhysicsSystem'
+import { projectileHitsBubbleSystem } from './projectileHitsBubbleSystem'
 
 export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): Ticker[] => {
     return [
@@ -17,6 +18,7 @@ export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): 
         bubbleReachedTopSystem({ world }),
         updatePhysicsSystem({ world }),
         updateEntityFromPhysicsSystem({ world }),
-        fireAtBubblesSystem({ world })
+        fireAtBubblesSystem({ world }),
+        projectileHitsBubbleSystem({ world })
     ]
 }
