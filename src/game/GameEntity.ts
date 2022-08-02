@@ -15,6 +15,7 @@ export type GameEntity = {
     destination?: Vec3
     destinationRadius?: number
     onDestinationReached?: () => void // KISS
+    speed?: number
 
     // fire control
     cooldownTicks?: number

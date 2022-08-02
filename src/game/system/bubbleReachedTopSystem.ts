@@ -1,7 +1,7 @@
 import { toVec3 } from '../../engine/math'
 import { Tick } from '../../engine/tick'
 import { GameWorld } from '../GameWorld'
-import { removeBubbleEntity } from './removeBubbleEntity'
+import { GameWorlds } from '../GameWorlds'
 
 export const bubbleReachedTopSystem = ({ world }: { world: GameWorld }) => {
     return (tick: Tick) => {
@@ -16,7 +16,7 @@ export const bubbleReachedTopSystem = ({ world }: { world: GameWorld }) => {
                 if (z > WAVE_TOP) {
                     return
                 }
-                removeBubbleEntity({ world, entity })
+                GameWorlds.removeEntity(world, id)
             })
     }
 }

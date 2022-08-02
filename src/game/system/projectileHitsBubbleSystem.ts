@@ -20,6 +20,7 @@ export const projectileHitsBubbleSystem = ({ world }: { world: GameWorld }) => {
                 // TODO popped bubble (score, sound, etc) for now just destroy
                 collided.forEach((bubble) => {
                     GameWorlds.removeEntity(world, bubble.id)
+                    GameWorlds.removeEntity(world, projectile.id)
                 })
             })
     }

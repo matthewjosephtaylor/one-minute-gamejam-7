@@ -13,8 +13,8 @@ export const moveEntityToDestinationSystem = ({ world, addDestructor }: { world:
         entities
             .filter((e) => isDefined(e.destination) && isDefined(e.mesh))
             .forEach((entity) => {
-                const { mesh, destination, destinationRadius = 0, onDestinationReached = () => {} } = entity
-                mesh.position = v3(Maths.lerp3(mesh.position, destination, deltaMs * 0.0003))
+                const { mesh, destination, destinationRadius = 0, speed = 1, onDestinationReached = () => {} } = entity
+                mesh.position = v3(Maths.lerp3(mesh.position, destination, deltaMs * speed * 0.0003))
                 if (Maths.distance2(mesh.position, destination) <= destinationRadius) {
                     onDestinationReached()
                 }

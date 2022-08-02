@@ -27,7 +27,7 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
         const x = random() * boardWidth - boardWidth / 2
         const z = unitsTall / 2
 
-        const radius = 0.1 + random() * 0.3
+        const radius = 0.1 + random() * 0.15
         const mesh = Meshes.getSphere(scene, id, {
             position: [x, 0, z],
             color: Colors.from('blue').mix(Colors.from('green')).mix(Colors.from('white')).toString(),
@@ -42,7 +42,10 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
             y: -z,
             radius,
             mass: 10,
-            frictionAir: 0.05
+            friction: 0,
+            frictionStatic: 0
+
+            // frictionAir: 0.05
         })
 
         GameWorlds.addEntity(world, {

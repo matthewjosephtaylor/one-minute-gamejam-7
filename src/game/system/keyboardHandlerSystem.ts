@@ -3,6 +3,7 @@ import { GameWorld } from '../GameWorld'
 import { consumeKey } from './consumeKey'
 import { DEBUG_KEY, PAUSE_KEY } from '../KEYBOARD_KEYS'
 import { toggleDebug } from '../toggleDebug'
+import { Physics } from '../../engine/physics-2d'
 
 export type AddDestructor = (destructor: () => void) => void
 
@@ -43,8 +44,8 @@ export const keyboardHandlerSystem = ({
         consumeKey(KEY_STATE, DEBUG_KEY, () => {
             toggleDebug(world)
             console.log({ world })
+            console.log(`world physicsBodies: ${Physics.allBodies(world.physicsEngine.world).length}`)
+            console.log(`scene meshes: ${world.scene.meshes.length}`)
         })
     }
 }
-
-

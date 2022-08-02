@@ -23,7 +23,6 @@ export const placeTowerAtPointerClickSystem = ({
 
     const pointerDownHandler = (event: PointerEvent) => {
         const { offsetX, offsetY } = event
-        console.log(`${offsetX} ${offsetY}`)
         CLICK_STATE.position = [offsetX, offsetY]
     }
     parent.addEventListener('pointerdown', pointerDownHandler)
@@ -72,11 +71,12 @@ export const placeTowerAtPointerClickSystem = ({
             return
         }
 
-        const physicsBody = Physics.getBodyType(physicsEngine.world, 'rectangle', id, {
+        const physicsBody = Physics.getBodyType(physicsEngine.world, 'circle', id, {
             x: pegX,
             y: -pegZ,
-            width: size,
-            height: size,
+            radius: size / 2,
+            // width: size,
+            // height: size,
             isStatic: true,
             mass: 10,
             frictionAir: 0.05

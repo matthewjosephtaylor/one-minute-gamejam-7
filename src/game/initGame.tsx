@@ -14,7 +14,7 @@ export const initGame = (canvas: HTMLCanvasElement) => {
 
     const physicsEngine = Physics.createEngine({
         gravity: {
-            y: 0.00001
+            y: 0.000001
         }
     })
 
