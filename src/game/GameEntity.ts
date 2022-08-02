@@ -3,12 +3,22 @@ import { Vec3 } from '../engine/math'
 
 import { Body } from 'matter-js'
 
-export type EntityType = 'bubble' | 'tower' | 'peg'
+export type EntityType = 'bubble' | 'tower' | 'peg' | 'projectile'
 
 export type GameEntity = {
     id: string
     mesh: AbstractMesh
-    destination?: Vec3
+    physicsBody?: Body
     type: EntityType
-    physicsBody: Body
+
+    // movement outside of physics
+    destination?: Vec3
+    destinationRadius?: number
+    onDestinationReached?: () => void // KISS
+
+    // fire control
+    cooldownTicks?: number
+    fireRateTicks?: number
+
+    range?: number // how far the tower can shoot
 }

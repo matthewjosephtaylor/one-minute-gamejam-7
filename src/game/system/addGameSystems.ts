@@ -5,6 +5,7 @@ import { bubbleSpawnSystem } from './bubbleSpawnSystem'
 import { AddDestructor } from './keyboardHandlerSystem'
 import { moveEntityToDestinationSystem } from './moveEntityToDestinationSystem'
 import { placeTowerAtPointerClickSystem } from './placeTowerAtPointerClickSystem'
+import { fireAtBubblesSystem } from './fireAtBubblesSystem'
 import { updateEntityFromPhysicsSystem } from './updateEntityFromPhysicsSystem'
 import { updatePhysicsSystem } from './updatePhysicsSystem'
 
@@ -15,6 +16,7 @@ export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): 
         bubbleSpawnSystem({ world }),
         bubbleReachedTopSystem({ world }),
         updatePhysicsSystem({ world }),
-        updateEntityFromPhysicsSystem({ world })
+        updateEntityFromPhysicsSystem({ world }),
+        fireAtBubblesSystem({ world })
     ]
 }

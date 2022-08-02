@@ -48,9 +48,10 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
         GameWorlds.addEntity(world, {
             id,
             mesh,
-            // destination,
             type: 'bubble',
             physicsBody
         })
     }
 }
+
+
