@@ -8,6 +8,7 @@ import { getDynamicTexture } from './getDynamicTexture'
 import { drawOnTexture } from './drawOnTexture'
 import { clearTexture } from './clearTexture'
 import { destroyTexture } from './destroyTexture'
+import { getPathTexture } from './getPathTexture'
 
 export type TextureSamplingModeMap = typeof TEXTURE_SAMPLING_MODES
 
@@ -20,6 +21,12 @@ export type TextureOptions = Partial<{
 export type HtmlElementTextureOptions = Partial<
     TextureOptions & {
         element: HTMLCanvasElement | HTMLVideoElement
+    }
+>
+
+export type PathTextureOptions = Partial<
+    TextureOptions & {
+        src: string
     }
 >
 
@@ -37,6 +44,7 @@ export const Textures = {
     getTexture,
     getHtmlElementTexture,
     getDynamicTexture,
+    getPathTexture,
     updateTexture,
 
     imageToTexture,

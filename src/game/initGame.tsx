@@ -21,6 +21,7 @@ export const initGame = (canvas: HTMLCanvasElement) => {
     // various forms of loops
     const controlLoop = Ticks.create({})
     const renderLoop = Ticks.create({
+        running: false,
         ticker: (tick) => {
             scene.render()
         }
@@ -57,9 +58,10 @@ export const initGame = (canvas: HTMLCanvasElement) => {
         renderLoop,
         seed: 0
     }
-    addDebugMeshes(world)
+    // addDebugMeshes(world)
 
     setupCameraTopDown(world)
+    renderLoop.running = true
     gameLoop.tickers.push(...addGameSystems(world, addDestructor))
     controlLoop.tickers.push(...addControlSystems(world, addDestructor))
 

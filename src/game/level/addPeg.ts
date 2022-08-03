@@ -1,4 +1,4 @@
-import { Materials, Meshes } from '../../engine/babs'
+import { Materials, Meshes, Textures } from '../../engine/babs'
 import { Physics } from '../../engine/physics-2d'
 import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
@@ -6,21 +6,28 @@ import { GameWorlds } from '../GameWorlds'
 export const addPeg = ({ world, x, y }: { world: GameWorld; x: number; y: number }) => {
     const { scene, physicsEngine } = world
 
-    const mat = Materials.getMaterial(scene, 'peg-material')
+    const tex = Textures.getPathTexture(scene, 'peg-texture', { src: 'img/peg.png' })
+    const mat = Materials.getMaterial(scene, 'peg-material', {
+        emissiveTexture: tex.name,
+        opacityTexture: tex.name
+    })
 
     const id = `peg-${x},${y}`
-    const radius = 0.1
-    const mesh = Meshes.getSphere(scene, id, {
+    const size = 0.2
+
+    const mesh = Meshes.getBox(scene, id, {
         position: [x, 0, y],
-        color: 'green',
-        radius,
+        width: size,
+        // height: size,
+        height: 0.001,
+        depth: size,
         material: mat.name
     })
 
     const physicsBody = Physics.getBodyType(physicsEngine.world, 'circle', id, {
         x,
         y: -y,
-        radius,
+        radius: size / 2,
         isStatic: true,
         mass: 10,
         frictionStatic: 0

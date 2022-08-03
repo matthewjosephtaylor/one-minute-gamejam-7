@@ -1,14 +1,15 @@
-import { ArcRotateCamera, Camera } from 'babylonjs'
+import { ArcRotateCamera, Camera, UniversalCamera } from 'babylonjs'
+import { v3 } from '../../engine/babs/v3'
 import { GameWorld } from '../GameWorld'
 
 export const setupCameraTopDown = (world: GameWorld) => {
     const { scene, unitsTall, unitsWide } = world
-    const camera = scene.activeCamera as ArcRotateCamera
-    //TODO cleanup unneded variables
-    const topDownAlpha = -Math.PI / 2
-    const topDownBeta = 0
-    camera.alpha = topDownAlpha
-    camera.beta = topDownBeta
+
+    scene?.activeCamera?.dispose()
+
+    const camera = new UniversalCamera('camera', v3(0, 100, 0))
+    camera.target = v3(0, 0, 0)
+    camera.rotation = v3(Math.PI / 2, 0, 0)
     camera.orthoTop = -unitsTall / 2
     camera.orthoBottom = unitsTall / 2
     camera.orthoLeft = -unitsWide / 2
