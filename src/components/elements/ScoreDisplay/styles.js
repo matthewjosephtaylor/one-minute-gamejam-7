@@ -6,4 +6,5 @@ export const ScoreDisplay = styled.div`
     left: 0;
     color: #fff;
     padding: 5px;
+    z-index: 50;
 `

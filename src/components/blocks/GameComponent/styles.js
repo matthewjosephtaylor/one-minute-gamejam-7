@@ -16,5 +16,18 @@ export const GameCanvas = styled.div`
     canvas {
         width: 100%;
         height: 100%;
+        z-index: 20;
+        position: relative;
     }
+`
+export const Hamburger = styled.div`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-image: url('/img/menu@2x.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    z-index: 30;
+    cursor: pointer;
 `
