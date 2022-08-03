@@ -2,6 +2,7 @@ import { Engine } from 'babylonjs'
 import { Materials, Meshes, Textures } from '../../engine/babs'
 import { v3 } from '../../engine/babs/v3'
 import { times } from '../../engine/object'
+import { Physics } from '../../engine/physics-2d'
 import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
 import { addPeg } from './addPeg'
@@ -24,8 +25,8 @@ export const createLevel = ({ world }: { world: GameWorld }) => {
     addWalls({ world })
 }
 
-export const addWalls = ({ world }) => {
-    const { scene, unitsWide, unitsTall } = world
+export const addWalls = ({ world }: { world: GameWorld }) => {
+    const { scene, unitsWide, unitsTall, physicsEngine } = world
 
     const tex = Textures.getPathTexture(scene, 'walls-texture', {
         src: 'img/walls.png'
@@ -51,9 +52,33 @@ export const addWalls = ({ world }) => {
         mesh,
         type: 'environment'
     })
+
+    // add wall bodies
+
+    const leftId = `left-${id}`
+    const rightId = `right-${id}`
+
+    const wallWidth = 0.25
+
+    const bodyLeft = Physics.getBodyType(physicsEngine.world, 'rectangle', leftId, {
+        x: -unitsWide / 2 + 0.5,
+        // y: -unitsTall / 2,
+        y:0,
+        width: wallWidth,
+        isStatic: true,
+        height: unitsTall
+    })
+    const bodyRight = Physics.getBodyType(physicsEngine.world, 'rectangle', rightId, {
+        x: unitsWide / 2 - 0.5,
+        // y: -unitsTall / 2,
+        y:0,
+        width: wallWidth,
+        isStatic: true,
+        height: unitsTall
+    })
 }
 
-export const addBackground = ({ world }) => {
+export const addBackground = ({ world }: { world: GameWorld }) => {
     const { scene, unitsWide, unitsTall } = world
 
     const tex = Textures.getPathTexture(scene, 'background-texture', {
@@ -82,7 +107,7 @@ export const addBackground = ({ world }) => {
     })
 }
 
-export const addTopOverlay = ({ world }) => {
+export const addTopOverlay = ({ world }: { world: GameWorld }) => {
     const { scene, unitsWide, unitsTall } = world
 
     const tex = Textures.getPathTexture(scene, 'overlay-texture', {
