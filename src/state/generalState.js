@@ -1,10 +1,10 @@
 import create from 'zustand'
 
 const useGeneralState = create((set) => ({
-    username: 'Panguino',
-    color: 'red',
-    setColor: (color) => set((state) => ({ ...state, color: color })),
-    setUsername: (username) => set((state) => ({ ...state, username }))
+    score: 0,
+    shells: 0,
+    setScore: (score) => set((state) => ({ ...state, score })),
+    setShells: (shells) => set((state) => ({ ...state, shells }))
 }))
 
 export default useGeneralState
