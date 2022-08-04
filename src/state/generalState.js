@@ -9,6 +9,7 @@ const useGeneralState = create((set) => ({
     sfxVolume: 80,
     musicVolume: 80,
     menuOpen: false,
+    menuOpen: true,
     placementTime: 15,
     gameTime: 60,
     placementPhase: false,

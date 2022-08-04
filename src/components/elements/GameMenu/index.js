@@ -6,9 +6,23 @@ import MenuButton from './MenuButton'
 import VolumeScrubber from '../VolumeScrubber'
 
 const GameMenu = () => {
-    const { setMenuOpen, sfxVolume, musicVolume, setSFXVolume, setMusicVolume, startGame, endPhase, highScores, lastHighScore, closeEndScreen } =
-        useGeneralState((state) => state)
+    const {
+        setMenuOpen,
+        sfxVolume,
+        musicVolume,
+        setSFXVolume,
+        setMusicVolume,
+        startGame,
+        endPhase,
+        highScores,
+        lastHighScore,
+        closeEndScreen,
+        gamePhase,
+        placementPhase
+    } = useGeneralState((state) => state)
     const [optionsOpen, setOptionsOpen] = useState(false)
+
+    const inGame = placementPhase || gamePhase
 
     return (
         <S.GameMenuWrapper>
@@ -18,15 +32,27 @@ const GameMenu = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: 'spring', damping: 20, stiffness: 400, duration: 1, delay: 0.2 }}
                 >
-                    <S.Close
-                        onClick={() => {
-                            setMenuOpen(false)
-                        }}
-                    />
+                    {inGame && (
+                        <S.Close
+                            onClick={() => {
+                                setMenuOpen(false)
+                            }}
+                        />
+                    )}
                     {!optionsOpen ? (
                         <>
                             <h1>Menu</h1>
-                            <MenuButton onClick={startGame}>Start Game</MenuButton>
+                            {inGame ? (
+                                <MenuButton
+                                    onClick={() => {
+                                        setMenuOpen(false)
+                                    }}
+                                >
+                                    Resume
+                                </MenuButton>
+                            ) : (
+                                <MenuButton onClick={startGame}>Start Game</MenuButton>
+                            )}
                             <MenuButton>High Scores</MenuButton>
                             <MenuButton
                                 onClick={() => {
