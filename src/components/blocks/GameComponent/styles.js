@@ -31,3 +31,12 @@ export const Hamburger = styled.div`
     z-index: 30;
     cursor: pointer;
 `
+
+export const TowerNav = styled.div`
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 30;
+    display: flex;
+    gap: 10px;
+`

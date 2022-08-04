@@ -9,6 +9,7 @@ import useGeneralState from '@/state/generalState'
 import { GameWorld } from '../../../game/GameWorld'
 import { placeTowerAtMousePosition } from '../../../game/tower/placeTowerAtMousePosition'
 import { TOWERS } from '../../../game/tower/TOWERS'
+import TowerNavItem from './TowerNavItem'
 
 const GameComponent = () => {
     const canvasRef = useRef<HTMLCanvasElement>()
@@ -46,31 +47,25 @@ const GameComponent = () => {
                 {menuOpen && <GameMenu />}
                 <ScoreDisplay />
                 <ShellDisplay />
-            </S.GameCanvas>
-
-            <div
-                // TODO HACK to get buttons on screen fast. For the love of Knuth please fix me! :)
-                style={{ position: 'absolute', top: '92vh', left: '50vw' }}
-            >
-                <button>
+                <S.TowerNav>
                     {Object.entries(TOWERS).map((entry, index) => {
                         const [towerName, tower] = entry
                         const { textureSrc } = tower
 
                         return (
-                            <img
+                            <TowerNavItem
                                 key={index}
                                 draggable="true"
                                 onDragStart={(event) => {
                                     event.dataTransfer.setData('text', towerName)
                                 }}
-                                style={{ height: '5em' }}
-                                src={textureSrc}
+                                icon={textureSrc}
                             />
                         )
                     })}
-                </button>
-            </div>
+                </S.TowerNav>
+            </S.GameCanvas>
+
         </S.Game>
     )
 }
