@@ -26,7 +26,7 @@ export const createLevel = ({ world }: { world: GameWorld }) => {
 }
 
 export const addWalls = ({ world }: { world: GameWorld }) => {
-    const { scene, unitsWide, unitsTall, physicsEngine } = world
+    const { scene, unitsWide, unitsTall, physicsEngine, physicsScale } = world
 
     const tex = Textures.getPathTexture(scene, 'walls-texture', {
         src: 'img/walls.png'
@@ -58,23 +58,22 @@ export const addWalls = ({ world }: { world: GameWorld }) => {
     const leftId = `left-${id}`
     const rightId = `right-${id}`
 
-    const wallWidth = 0.25
+    // const wallWidth = 0.25 * physicsScale
+    const wallWidth = 0.008 * physicsScale
 
     const bodyLeft = Physics.getBodyType(physicsEngine.world, 'rectangle', leftId, {
-        x: -unitsWide / 2 + 0.5,
-        // y: -unitsTall / 2,
+        x: (-unitsWide * physicsScale) / 2,
         y: 0,
-        width: wallWidth,
+        width: wallWidth * physicsScale,
         isStatic: true,
-        height: unitsTall
+        height: unitsTall * physicsScale
     })
     const bodyRight = Physics.getBodyType(physicsEngine.world, 'rectangle', rightId, {
-        x: unitsWide / 2 - 0.5,
-        // y: -unitsTall / 2,
+        x: (unitsWide * physicsScale) / 2,
         y: 0,
-        width: wallWidth,
+        width: wallWidth * physicsScale,
         isStatic: true,
-        height: unitsTall
+        height: unitsTall * physicsScale
     })
 }
 
