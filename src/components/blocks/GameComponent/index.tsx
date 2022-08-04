@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from 'react'
 import * as S from './styles'
 import { initGame } from '../../../game/initGame'
 import ScoreDisplay from '@/components/elements/ScoreDisplay'
-import ShellDisplay from '@/components/elements/ShellDisplay'
 import GameMenu from '@/components/elements/GameMenu'
 import useGeneralState from '@/state/generalState'
 import { GameWorld } from '../../../game/GameWorld'
 import { placeTowerAtMousePosition } from '../../../game/tower/placeTowerAtMousePosition'
 import { TOWERS } from '../../../game/tower/TOWERS'
 import TowerNavItem from './TowerNavItem'
+import TimerDisplay from '@/components/elements/TimerDisplay'
+import MoneyDisplay from '@/components/elements/MoneyDisplay'
 
 const GameComponent = () => {
     const canvasRef = useRef<HTMLCanvasElement>()
@@ -46,7 +47,8 @@ const GameComponent = () => {
                 <S.Hamburger onClick={() => setMenuOpen(!menuOpen)} />
                 {menuOpen && <GameMenu />}
                 <ScoreDisplay />
-                <ShellDisplay />
+                <MoneyDisplay />
+                <TimerDisplay />
                 <S.TowerNav>
                     {Object.entries(TOWERS).map((entry, index) => {
                         const [towerName, tower] = entry

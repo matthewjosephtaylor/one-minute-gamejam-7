@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ShellDisplay = styled.div`
+export const MoneyDisplay = styled.div`
     position: absolute;
     bottom: 20px;
     left: 20px;

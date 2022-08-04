@@ -44,3 +44,40 @@ export const Close = styled.div`
     z-index: 30;
     cursor: pointer;
 `
+
+export const EndScreen = styled.div`
+    padding: 20px;
+    h1 {
+        color: #fff;
+        padding: 0;
+        margin: -2px 0 15px;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-size: 22px;
+        letter-spacing: 0px;
+        text-align: center;
+        text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    }
+`
+export const EndScore = styled.div`
+    color: #fff;
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 42px;
+    letter-spacing: 0px;
+    text-align: center;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+`
+export const HighScores = styled.div``
+export const Score = styled.div`
+    color: #fff;
+    padding: 0;
+    margin: -2px 0 15px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0px;
+    text-align: center;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+`
