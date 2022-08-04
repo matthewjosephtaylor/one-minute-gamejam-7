@@ -74,7 +74,7 @@ const GameMenu = () => {
                                     return
                                 }
                                 return (
-                                    <S.Score>
+                                    <S.Score key={index}>
                                         {index + 1}: {highScore}
                                     </S.Score>
                                 )
