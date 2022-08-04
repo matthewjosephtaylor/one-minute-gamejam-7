@@ -54,7 +54,7 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
 
     const mesh = Meshes.getBox(scene, id, {
         // position: pegPosition,
-        position: [0, 10, 0],
+        position: [0, 20, 0],
         // color: 'blue',
         width: size,
         height: size,
