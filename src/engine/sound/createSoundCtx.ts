@@ -1,4 +1,4 @@
-import { Destination, loaded, Sampler, Synth } from 'tone'
+import { Destination, loaded, Sampler, Synth, Player, Volume } from 'tone'
 import { Objects } from '../object/Objects'
 import { SoundSetupSpec } from './setupSound'
 import { SoundCtx } from './type/SoundCtx'
@@ -7,14 +7,17 @@ export const MAX_SYNTHS = 32
 export const MAX_SAMPLERS = 32
 
 export const createSoundCtx = async (spec: Partial<SoundSetupSpec> = {}): Promise<SoundCtx> => {
-    const { sampleMap } = spec
+    const { sampleMap = {}, audioMap = {} } = spec
 
     const synths = {
         normal: new Synth().toDestination()
     }
 
+    const volumes: Record<string, Volume> = {}
+
     const samplers = Objects.fromEntries(
         Objects.entries(sampleMap).map(([key, url]) => {
+            const volume = new Volume().toDestination()
             const sampler = new Sampler({
                 urls: {
                     C4: url
@@ -26,28 +29,29 @@ export const createSoundCtx = async (spec: Partial<SoundSetupSpec> = {}): Promis
                     console.error(error)
                     console.error('ERROR LOADING SAMPLES', sampleMap)
                 }
-            }).toDestination()
+            }).connect(volume)
+            volumes[key] = volume
             return [key, sampler]
         })
     )
 
-    // const samplers = Array.from({ length: MAX_SAMPLERS }).map(() => {
-    //   const sampler = new Sampler({
-    //     urls: sampleMap,
-    //     onload: () => {
-    //       console.log("LOADED SAMPLES", sampleMap);
-    //     },
-    //     onerror: (error) => {
-    //       console.error(error);
-    //       console.error("ERROR LOADING SAMPLES", sampleMap);
-    //     },
-    //   }).toDestination();
-    //   return sampler;
-    // });
+    const players = Objects.fromEntries(
+        Objects.entries(audioMap).map((entry) => {
+            const [key, url] = entry
+            const volume = new Volume(12).toDestination()
+            const player = new Player(url).connect(volume)
+            volumes[key] = volume
+            return [key, player]
+        })
+    )
+
     const ctx: SoundCtx = {
         synths,
-        samplers
+        samplers,
+        players,
+        volumes
     }
+    console.log({ ctx })
     Destination.volume.rampTo(-20)
     await loaded()
     return ctx

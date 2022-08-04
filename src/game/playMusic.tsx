@@ -1,7 +1,8 @@
-import { Sounds } from '../engine/sound';
-import { SoundCtx } from '../engine/sound/type/SoundCtx';
-import { MUSIC_SOURCES } from './MUSIC_SOURCES';
-import { Player } from 'tone';
+import { Sounds } from '../engine/sound'
+import { SoundCtx } from '../engine/sound/type/SoundCtx'
+import { MUSIC_SOURCES } from './MUSIC_SOURCES'
+import { Player } from 'tone'
+import { Randoms } from '../engine/random'
 
 /**
  * Loop music in random order.
@@ -12,18 +13,18 @@ export const playMusic = (ctx: SoundCtx): (() => void) => {
     const STATE = {
         player: undefined as Player,
         destroyed: false
-    };
+    }
 
-    STATE.player = Sounds.playAudio({ ctx, src: MUSIC_SOURCES.map((src) => `music/${src}`) });
+    STATE.player = Sounds.playAudio({ ctx, track: Randoms.pickRandom(MUSIC_SOURCES) })
     STATE.player.onstop = () => {
         if (STATE.destroyed) {
-            return;
+            return
         }
-        STATE.player = Sounds.playAudio({ ctx, src: MUSIC_SOURCES.map((src) => `music/${src}`) });
-    };
+        STATE.player = Sounds.playAudio({ ctx, track: Randoms.pickRandom(MUSIC_SOURCES) })
+    }
 
     return () => {
-        STATE.player.stop();
-        STATE.destroyed = true;
-    };
-};
+        STATE.player.stop()
+        STATE.destroyed = true
+    }
+}
