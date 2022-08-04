@@ -11,12 +11,13 @@ export const createLevel = ({ world }: { world: GameWorld }) => {
     // add pegs with colliders
 
     // simple grid
+    const gridScale = 1.2
     times(6, (y) => {
         times(6, (x) => {
-            const offset = y % 2 === 0 ? 0 : 1
-            const tx = x - 3 + offset
-            const ty = y - 3
-            addPeg({ world, x: tx, y: ty })
+            const offset = y % 2 === 0 ? 0 : 0.5
+            const tx = x - 3 + offset + gridScale - 1
+            const ty = y - 2.7
+            addPeg({ world, x: tx * gridScale, y: ty * gridScale })
         })
     })
 
