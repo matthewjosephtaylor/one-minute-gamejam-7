@@ -1,4 +1,5 @@
 import { Engine } from 'babylonjs'
+import gsap from 'gsap'
 import { Materials, Meshes, Textures } from '../../engine/babs'
 import { v3 } from '../../engine/babs/v3'
 import { times } from '../../engine/object'
@@ -120,6 +121,9 @@ export const addTopOverlay = ({ world }: { world: GameWorld }) => {
     })
     mat.alphaMode = Engine.ALPHA_MULTIPLY
     // mat.wireframe = true
+
+    // Doesn't work TODO figure out how to get this to work.
+    gsap.to(mat, { alpha: .5, yoyo: true, repeat: -1, duration: 1})
 
     const id = `level-overlay`
 
