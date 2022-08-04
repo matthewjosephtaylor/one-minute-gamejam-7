@@ -1,5 +1,5 @@
-
 export type Tower = {
-    textureSrc: string;
+    textureSrc: string
     cost: number
-};
+    range: number
+}

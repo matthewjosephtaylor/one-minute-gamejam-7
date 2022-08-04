@@ -8,3 +8,5 @@ export const entityDistance2 = (a: GameEntity, b: GameEntity) => {
 
   return Maths.distance2([ax, az], [bx, bz]);
 };
+
+

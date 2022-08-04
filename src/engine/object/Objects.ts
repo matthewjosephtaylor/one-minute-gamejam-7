@@ -1,4 +1,6 @@
+import { entries } from './entries'
 import { first } from './first'
+import { fromEntries } from './fromEntries'
 import { iff } from './iff'
 import { isDefined } from './isDefined'
 import { isUndefined } from './isUndefined'
@@ -18,5 +20,7 @@ export const Objects = {
     tuple4,
     tuple5,
     first,
-    tailOf
+    tailOf,
+    entries,
+    fromEntries
 }

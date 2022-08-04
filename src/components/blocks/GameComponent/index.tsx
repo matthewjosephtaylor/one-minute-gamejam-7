@@ -19,10 +19,18 @@ const GameComponent = () => {
     // TODO use zustand?
     const [world, setWorld] = useState<GameWorld>()
 
-    useEffect(() => {
-        const [destructor, world] = initGame(canvasRef.current)
+    const setup = async () => {
+        const [destructor, world] = await initGame(canvasRef.current)
         setWorld(world)
         return destructor
+    }
+
+    useEffect(() => {
+        const destructorPromise = setup()
+        // not 100% on if this is a kosher practice but it should work for now.
+        return () => {
+            destructorPromise.then((destructor) => destructor())
+        }
     }, [])
 
     return (
@@ -67,7 +75,6 @@ const GameComponent = () => {
                     })}
                 </S.TowerNav>
             </S.GameCanvas>
-
         </S.Game>
     )
 }

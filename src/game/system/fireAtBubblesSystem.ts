@@ -2,8 +2,10 @@ import { Maths } from '../../engine/math'
 import { first, isUndefined } from '../../engine/object'
 import { Tick } from '../../engine/tick'
 import { GameWorld } from '../GameWorld'
+import { entityDistance2 } from '../calculation/entityDistance2'
 import { fireAtTarget } from './fireAtTarget'
 import { sortEntitiesByDistanceFromTarget } from './sortEntitiesByDistanceFromTarget'
+import { entityToPosition2 } from '../calculation/entityToPosition2'
 
 export const fireAtBubblesSystem = ({ world }: { world: GameWorld }) => {
     return (tick: Tick) => {
@@ -30,6 +32,9 @@ export const fireAtBubblesSystem = ({ world }: { world: GameWorld }) => {
 
                 const closest = first(bubblesWithinRange)
                 if (isUndefined(closest)) {
+                    return
+                }
+                if (Maths.distance2(entityToPosition2(closest), entityToPosition2(entity)) > range) {
                     return
                 }
 
