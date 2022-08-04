@@ -6,7 +6,7 @@ import { Randoms } from '../../engine/random'
 import { Sounds } from '../../engine/sound'
 import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
-import { SFX_SOURCES } from '../initGame'
+import { SFX_SOURCES } from "../SFX_SOURCES"
 
 export const fireAtTarget = ({ world, target, from }: { world: GameWorld; from: Point3; target: Point3 }) => {
     const { scene, soundCtx } = world

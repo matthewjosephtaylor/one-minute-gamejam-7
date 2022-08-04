@@ -7,6 +7,8 @@ import { setupCameraTopDown } from './camera/setupCameraTopDown'
 import { createScene } from './createScene'
 import { GameWorld } from './GameWorld'
 import { createLevel } from './level/createLevel'
+import { MUSIC_SOURCES } from './MUSIC_SOURCES'
+import { SFX_SOURCES } from './SFX_SOURCES'
 import { addControlSystems } from './system/addControlSystems'
 import { addGameSystems } from './system/addGameSystems'
 import { AddDestructor } from './system/keyboardHandlerSystem'
@@ -81,22 +83,9 @@ export const initGame = async (canvas: HTMLCanvasElement) => {
 
     // TODO this should happen via UI interaction not on start
     createLevel({ world })
+    Sounds.playAudio({ ctx, repeat: true, src: MUSIC_SOURCES.map((src) => `music/${src}`) })
 
     return tuple2(() => {
         destructors.forEach((destructor) => destructor())
     }, world)
 }
-
-export const SFX_SOURCES = [
-    'bubble_pop1.mp3',
-    'bubble_pop2.mp3',
-    'bubble_pop3.mp3',
-    'game_end.mp3',
-    'game_start.mp3',
-    'placement_start.mp3',
-    'shoot_pearl_1.mp3',
-    'shoot_pearl_2.mp3',
-    'tower_placement_1.mp3',
-    'tower_placement_2.mp3',
-    'tower_placement_3.mp3'
-]

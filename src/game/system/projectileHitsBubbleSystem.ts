@@ -3,7 +3,7 @@ import { Sounds } from '../../engine/sound'
 import { Tick } from '../../engine/tick'
 import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
-import { SFX_SOURCES } from '../initGame'
+import { SFX_SOURCES } from "../SFX_SOURCES"
 import { entityDistance2 } from '../calculation/entityDistance2'
 
 export const projectileHitsBubbleSystem = ({ world }: { world: GameWorld }) => {

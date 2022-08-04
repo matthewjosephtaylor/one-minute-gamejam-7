@@ -6,7 +6,7 @@ import { Physics } from '../../engine/physics-2d'
 import { Randoms } from '../../engine/random'
 import { Sounds } from '../../engine/sound'
 import { GameWorld } from '../GameWorld'
-import { SFX_SOURCES } from '../initGame'
+import { SFX_SOURCES } from "../SFX_SOURCES"
 import { isTowerAtPosition } from '../system/isTowerAtPosition'
 import { sortEntitiesByDistanceFromTarget } from '../system/sortEntitiesByDistanceFromTarget'
 import { TOWERS } from './TOWERS'

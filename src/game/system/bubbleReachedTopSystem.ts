@@ -5,7 +5,7 @@ import { Tick } from '../../engine/tick'
 import useGeneralState from '../../state/generalState'
 import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
-import { SFX_SOURCES } from '../initGame'
+import { SFX_SOURCES } from "../SFX_SOURCES"
 
 export const bubbleReachedTopSystem = ({ world }: { world: GameWorld }) => {
     return (tick: Tick) => {

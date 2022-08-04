@@ -6,6 +6,7 @@ import { isDefined } from './isDefined'
 import { isUndefined } from './isUndefined'
 import { tailOf } from './tailOf'
 import { times } from './times'
+import { toMany } from './toMany'
 import { tuple0, tuple1, tuple2, tuple3, tuple4, tuple5 } from './tuples'
 
 export const Objects = {
@@ -22,5 +23,6 @@ export const Objects = {
     first,
     tailOf,
     entries,
-    fromEntries
+    fromEntries,
+    toMany
 }
