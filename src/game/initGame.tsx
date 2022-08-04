@@ -133,7 +133,7 @@ export const updateVolumes = ({
             ctx.volumes[sfx].mute = true
             return
         }
-        const volume = minDecibels + (musicVolume / 100) * maxDecibels
+        const volume = minDecibels + (sfxVolume / 100) * maxDecibels
         ctx.volumes[sfx].mute = false
         ctx.volumes[sfx].volume.value = volume
     })
