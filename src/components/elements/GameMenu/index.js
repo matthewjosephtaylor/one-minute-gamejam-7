@@ -41,8 +41,6 @@ const GameMenu = () => {
                         <>
                             <h1>Menu</h1>
                             {placementPhase || gamePhase ? (
-                                <MenuButton onClick={startGame}>Start Game</MenuButton>
-                            ) : (
                                 <MenuButton
                                     onClick={() => {
                                         setMenuOpen(false)
@@ -50,6 +48,8 @@ const GameMenu = () => {
                                 >
                                     Resume
                                 </MenuButton>
+                            ) : (
+                                <MenuButton onClick={startGame}>Start Game</MenuButton>
                             )}
                             <MenuButton>High Scores</MenuButton>
                             <MenuButton
