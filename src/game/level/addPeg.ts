@@ -4,7 +4,7 @@ import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
 
 export const addPeg = ({ world, x, y }: { world: GameWorld; x: number; y: number }) => {
-    const { scene, physicsEngine } = world
+    const { scene, physicsEngine, physicsScale } = world
 
     const tex = Textures.getPathTexture(scene, 'peg-texture', { src: 'img/peg.png' })
     const mat = Materials.getMaterial(scene, 'peg-material', {
@@ -25,9 +25,9 @@ export const addPeg = ({ world, x, y }: { world: GameWorld; x: number; y: number
     })
 
     const physicsBody = Physics.getBodyType(physicsEngine.world, 'circle', id, {
-        x,
-        y: -y,
-        radius: size / 2,
+        x: x* physicsScale,
+        y: -y * physicsScale,
+        radius: (size / 2),
         isStatic: true,
         mass: 10,
         frictionStatic: 0

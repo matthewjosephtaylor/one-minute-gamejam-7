@@ -29,7 +29,7 @@ export const placeTowerAtPointerClickSystem = ({
     addDestructor(() => parent.removeEventListener('pointerdown', pointerDownHandler))
 
     return (tick: Tick) => {
-        const { entities } = world
+        const { entities, physicsScale } = world
         const { position } = CLICK_STATE
         if (isUndefined(position)) {
             return
@@ -72,9 +72,9 @@ export const placeTowerAtPointerClickSystem = ({
         }
 
         const physicsBody = Physics.getBodyType(physicsEngine.world, 'circle', id, {
-            x: pegX,
-            y: -pegZ,
-            radius: size / 2,
+            x: pegX * physicsScale,
+            y: -pegZ * physicsScale,
+            radius: (size / 2) * physicsScale,
             // width: size,
             // height: size,
             isStatic: true,

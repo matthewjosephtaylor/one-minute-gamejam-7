@@ -63,7 +63,7 @@ export const addWalls = ({ world }: { world: GameWorld }) => {
     const bodyLeft = Physics.getBodyType(physicsEngine.world, 'rectangle', leftId, {
         x: -unitsWide / 2 + 0.5,
         // y: -unitsTall / 2,
-        y:0,
+        y: 0,
         width: wallWidth,
         isStatic: true,
         height: unitsTall
@@ -71,7 +71,7 @@ export const addWalls = ({ world }: { world: GameWorld }) => {
     const bodyRight = Physics.getBodyType(physicsEngine.world, 'rectangle', rightId, {
         x: unitsWide / 2 - 0.5,
         // y: -unitsTall / 2,
-        y:0,
+        y: 0,
         width: wallWidth,
         isStatic: true,
         height: unitsTall

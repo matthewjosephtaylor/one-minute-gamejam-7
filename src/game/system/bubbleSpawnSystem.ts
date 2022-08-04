@@ -13,7 +13,7 @@ import { v3 } from '../../engine/babs/v3'
 
 export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
     return async (tick: Tick) => {
-        const { scene, unitsWide, unitsTall, entities, physicsEngine } = world
+        const { scene, unitsWide, unitsTall, entities, physicsEngine, physicsScale } = world
         // TODO spawn rate for bubbles
         if (entities.filter((e) => e.type === 'bubble').length > 10) {
             return
@@ -57,9 +57,9 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
         // mesh.rotate(v3(0, 0, 0), Math.PI)
 
         const physicsBody = Physics.getBodyType(physicsEngine.world, 'circle', id, {
-            x,
-            y: -z,
-            radius: size / 2,
+            x: x * physicsScale,
+            y: -z * physicsScale,
+            radius: (size / 2) * physicsScale,
             mass: 10,
             friction: 0,
             frictionStatic: 0

@@ -6,13 +6,13 @@ import { GameWorld } from '../GameWorld'
 
 export const updateEntityFromPhysicsSystem = ({ world }: { world: GameWorld }) => {
     return (tick: Tick) => {
-        const { entities } = world
+        const { entities, physicsScale } = world
         entities
             .filter((e) => isDefined(e.physicsBody) && isDefined(e.mesh))
             .forEach((entity) => {
                 const { physicsBody, mesh } = entity
                 const [x, y] = toVec2(physicsBody.position)
-                mesh.position = v3(x, 0, -y)
+                mesh.position = v3(x / physicsScale, 0, -y / physicsScale)
             })
     }
 }
