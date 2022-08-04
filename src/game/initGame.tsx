@@ -7,7 +7,6 @@ import { setupCameraTopDown } from './camera/setupCameraTopDown'
 import { createScene } from './createScene'
 import { GameWorld } from './GameWorld'
 import { createLevel } from './level/createLevel'
-import { MUSIC_SOURCES } from './MUSIC_SOURCES'
 import { SFX_SOURCES } from './SFX_SOURCES'
 import { addControlSystems } from './system/addControlSystems'
 import { addGameSystems } from './system/addGameSystems'
@@ -83,9 +82,15 @@ export const initGame = async (canvas: HTMLCanvasElement) => {
 
     // TODO this should happen via UI interaction not on start
     createLevel({ world })
-    Sounds.playAudio({ ctx, repeat: true, src: MUSIC_SOURCES.map((src) => `music/${src}`) })
+
+    destructors.push(playMusic(ctx))
 
     return tuple2(() => {
+        // player.stop()
         destructors.forEach((destructor) => destructor())
     }, world)
 }
+
+import { playMusic } from './playMusic'
+
+
