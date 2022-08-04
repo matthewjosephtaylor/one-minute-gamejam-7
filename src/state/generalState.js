@@ -8,7 +8,7 @@ const useGeneralState = create((set) => ({
     money: 100,
     sfxVolume: 100,
     musicVolume: 100,
-    menuOpen: false,
+    menuOpen: true,
     placementTime: 15,
     gameTime: 60,
     placementPhase: false,
