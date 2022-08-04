@@ -22,6 +22,8 @@ const GameMenu = () => {
     } = useGeneralState((state) => state)
     const [optionsOpen, setOptionsOpen] = useState(false)
 
+    const inGame = placementPhase || gamePhase
+
     return (
         <S.GameMenuWrapper>
             {!endPhase ? (
@@ -30,7 +32,7 @@ const GameMenu = () => {
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ type: 'spring', damping: 20, stiffness: 400, duration: 1, delay: 0.2 }}
                 >
-                    {(placementPhase || gamePhase) && (
+                    {inGame && (
                         <S.Close
                             onClick={() => {
                                 setMenuOpen(false)
@@ -40,7 +42,7 @@ const GameMenu = () => {
                     {!optionsOpen ? (
                         <>
                             <h1>Menu</h1>
-                            {placementPhase || gamePhase ? (
+                            {inGame ? (
                                 <MenuButton
                                     onClick={() => {
                                         setMenuOpen(false)

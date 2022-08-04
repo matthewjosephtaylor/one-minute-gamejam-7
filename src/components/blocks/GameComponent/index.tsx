@@ -14,7 +14,11 @@ import MoneyDisplay from '@/components/elements/MoneyDisplay'
 
 const GameComponent = () => {
     const canvasRef = useRef<HTMLCanvasElement>()
-    const { menuOpen, setMenuOpen } = useGeneralState((state) => state)
+    const { 
+        gamePhase,
+        placementPhase, menuOpen, setMenuOpen } = useGeneralState((state) => state)
+
+    const inGame = placementPhase || gamePhase
 
     // TODO use zustand?
     const [world, setWorld] = useState<GameWorld>()
@@ -52,9 +56,9 @@ const GameComponent = () => {
                     }}
                     ref={canvasRef}
                 />
-                <S.Hamburger onClick={() => setMenuOpen(!menuOpen)} />
+                {!menuOpen && <S.Hamburger onClick={() => setMenuOpen(!menuOpen)} />}
                 {menuOpen && <GameMenu />}
-                <ScoreDisplay />
+                {inGame && <><ScoreDisplay />
                 <MoneyDisplay />
                 <TimerDisplay />
                 <S.TowerNav>
@@ -73,7 +77,7 @@ const GameComponent = () => {
                             />
                         )
                     })}
-                </S.TowerNav>
+                </S.TowerNav></>}
             </S.GameCanvas>
         </S.Game>
     )
