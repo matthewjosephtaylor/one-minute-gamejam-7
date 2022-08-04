@@ -1,13 +1,7 @@
-import Link from 'next/link'
+import GameComponent from '@/components/blocks/GameComponent'
 
 const Page = () => {
-    return (
-        <>
-            <Link href="/game">
-                <a>Click here to start game</a>
-            </Link>
-        </>
-    )
+    return <GameComponent />
 }
 
 export default Page

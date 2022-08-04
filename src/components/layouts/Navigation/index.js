@@ -1,7 +1,7 @@
 import * as S from './styles'
 
 const Navigation = () => {
-    return <S.Navigation>Navigation</S.Navigation>
+    return <S.Navigation>Bubble Defense</S.Navigation>
 }
 
 export default Navigation
