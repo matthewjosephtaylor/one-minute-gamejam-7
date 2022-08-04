@@ -7,14 +7,14 @@ import ShellDisplay from '@/components/elements/ShellDisplay'
 import GameMenu from '@/components/elements/GameMenu'
 import useGeneralState from '@/state/generalState'
 import { GameWorld } from '../../../game/GameWorld'
-import { placeTowerAtMousePosition } from "../../../game/tower/placeTowerAtMousePosition"
+import { placeTowerAtMousePosition } from '../../../game/tower/placeTowerAtMousePosition'
 import { TOWERS } from '../../../game/tower/TOWERS'
 
 const GameComponent = () => {
     const canvasRef = useRef<HTMLCanvasElement>()
     const { menuOpen, setMenuOpen } = useGeneralState((state) => state)
 
-    // TODO use zustand
+    // TODO use zustand?
     const [world, setWorld] = useState<GameWorld>()
 
     useEffect(() => {

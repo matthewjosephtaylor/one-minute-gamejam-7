@@ -13,7 +13,8 @@ const useGeneralState = create((set) => ({
     setScore: (score) => set((state) => ({ ...state, score })),
     setShells: (shells) => set((state) => ({ ...state, shells })),
     setSFXVolume: (sfxVolume) => set((state) => ({ ...state, sfxVolume: clamp(sfxVolume, 0, 100) })),
-    setMusicVolume: (musicVolume) => set((state) => ({ ...state, musicVolume: clamp(musicVolume, 0, 100) }))
+    setMusicVolume: (musicVolume) => set((state) => ({ ...state, musicVolume: clamp(musicVolume, 0, 100) })),
+    addScore: (value) => set((state) => ({ ...state, score: state.score + value }))
 }))
 
 export default useGeneralState
