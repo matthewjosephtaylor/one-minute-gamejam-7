@@ -110,27 +110,31 @@ export const updateVolumes = ({
     musicVolume,
     sfxVolume,
     ctx,
-    maxDecibels = 20
+    minDecibels = -20,
+    maxDecibels = 30
 }: {
     ctx: SoundCtx
     sfxVolume: number
     musicVolume: number
     maxDecibels?: number
+    minDecibels?: number
 }) => {
     MUSIC_SOURCES.forEach((track) => {
         if (musicVolume === 0) {
             ctx.volumes[track].mute = true
             return
         }
+        const volume = minDecibels + (musicVolume / 100) * maxDecibels
         ctx.volumes[track].mute = false
-        ctx.volumes[track].volume.value = (musicVolume / 100) * maxDecibels
+        ctx.volumes[track].volume.value = volume
     })
     SFX_SOURCES.forEach((sfx) => {
         if (sfxVolume === 0) {
             ctx.volumes[sfx].mute = true
             return
         }
+        const volume = minDecibels + (musicVolume / 100) * maxDecibels
         ctx.volumes[sfx].mute = false
-        ctx.volumes[sfx].volume.value = (sfxVolume / 100) * maxDecibels
+        ctx.volumes[sfx].volume.value = volume
     })
 }
