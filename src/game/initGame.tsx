@@ -8,6 +8,7 @@ import { setupCameraTopDown } from './camera/setupCameraTopDown'
 import { addDebugMeshes } from './addDebugMeshes'
 import { Physics } from '../engine/physics-2d'
 import { createLevel } from './level/createLevel'
+import { tuple2 } from '../engine/object'
 
 export const initGame = (canvas: HTMLCanvasElement) => {
     const scene = createScene(canvas)
@@ -70,7 +71,7 @@ export const initGame = (canvas: HTMLCanvasElement) => {
     // TODO this should happen via UI interaction not on start
     createLevel({ world })
 
-    return () => {
+    return tuple2(() => {
         destructors.forEach((destructor) => destructor())
-    }
+    }, world)
 }
