@@ -70,6 +70,9 @@ const GameMenu = () => {
                                 return b - a
                             })
                             .map((highScore, index) => {
+                                if (index > 4) {
+                                    return
+                                }
                                 return (
                                     <S.Score>
                                         {index + 1}: {highScore}
