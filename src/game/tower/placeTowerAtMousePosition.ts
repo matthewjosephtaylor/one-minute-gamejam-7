@@ -17,7 +17,12 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
         throw new Error(`No such tower: '${towerName}'`)
     }
 
-    const pick = first(Meshes.pickMeshes(scene, x, y))
+    const pick = first(
+        Meshes.pickMeshes(scene, x, y, {
+            // a bit hacky, ideally need to add metadata to mesh, but this works for now
+            predicate: (mesh) => mesh.id.startsWith('peg')
+        })
+    )
     if (isUndefined(pick)) {
         return
     }
@@ -31,7 +36,6 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
         emissiveTexture: tex.name,
         opacityTexture: tex.name
     })
-    console.log({ textureSrc })
 
     const id = `tower-${x},${y}`
 
@@ -39,6 +43,12 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
     const sortedEntities = entities.filter((e) => e.type === 'peg').sort((a, b) => sortEntitiesByDistanceFromTarget(a, b, [px, pz]))
     const closestPeg = first(sortedEntities)
     const pegPosition = closestPeg.mesh.position
+
+    const [pegX, pegY, pegZ] = toVec3(pegPosition)
+    if (isTowerAtPosition({ world, position: [pegX, pegY, pegZ] })) {
+        console.log(`tower already at ${pegPosition}`)
+        return
+    }
 
     const size = 0.5
 
@@ -52,11 +62,6 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
         material: mat.name
     })
     mesh.rotation = v3(0, Math.PI / 2, 0)
-
-    const [pegX, pegY, pegZ] = toVec3(pegPosition)
-    if (isTowerAtPosition({ world, position: [pegX, pegY, pegZ] })) {
-        return
-    }
 
     const physicsBody = Physics.getBodyType(physicsEngine.world, 'circle', id, {
         x: pegX * physicsScale,

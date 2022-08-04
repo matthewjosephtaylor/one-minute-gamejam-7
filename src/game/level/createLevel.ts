@@ -21,7 +21,7 @@ export const createLevel = ({ world }: { world: GameWorld }) => {
     })
 
     addBackground({ world })
-    // addTopOverlay({ world })
+    addTopOverlay({ world })
     addWalls({ world })
 }
 
