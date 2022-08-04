@@ -2,11 +2,10 @@ import { useState, useRef, useEffect } from 'react'
 
 import * as S from './styles'
 import useGeneralState from '@/state/generalState'
+import MenuButton from '../MenuButton'
 
 const TimerDisplay = () => {
-    const { placementPhase, placementTime, gamePhase, gameTime, finishedPlacement, finishedGame, score, addHighScore } = useGeneralState(
-        (state) => state
-    )
+    const { placementPhase, gamePhase, gameTime, finishedPlacement, finishedGame, score, addHighScore } = useGeneralState((state) => state)
     const [count, setCount] = useState(0)
 
     const requestRef = useRef()
@@ -28,21 +27,12 @@ const TimerDisplay = () => {
             previousTimeRef.current = undefined
             requestRef.current = requestAnimationFrame(animate)
         }
-        if (placementPhase) {
-            cancelAnimationFrame(requestRef.current)
-            setCount(placementTime)
-            previousTimeRef.current = undefined
-            requestRef.current = requestAnimationFrame(animate)
-        }
-    }, [gamePhase, placementPhase])
+    }, [gamePhase])
 
     useEffect(() => {
         if (count < 0) {
             cancelAnimationFrame(requestRef.current)
             setCount(0)
-            if (placementPhase) {
-                finishedPlacement()
-            }
             if (gamePhase) {
                 finishedGame()
                 addHighScore(score)
@@ -55,7 +45,17 @@ const TimerDisplay = () => {
         return () => cancelAnimationFrame(requestRef.current)
     }, [])
 
-    return <S.TimerDisplay>{Math.round(count)}</S.TimerDisplay>
+    return (
+        <>
+            {gamePhase && <S.TimerDisplay>{Math.round(count)}</S.TimerDisplay>}
+            {placementPhase && (
+                <S.PlacementDisplay>
+                    <p>Place your defense.</p>
+                    <MenuButton onClick={finishedPlacement}>Ready!</MenuButton>
+                </S.PlacementDisplay>
+            )}
+        </>
+    )
 }
 
 export default TimerDisplay
