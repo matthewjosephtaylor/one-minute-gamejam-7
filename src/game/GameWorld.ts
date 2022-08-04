@@ -10,6 +10,7 @@ export type GameWorld = {
     debug: boolean
     unitsWide: number
     unitsTall: number
+    physicsScale: number
 
     entities: GameEntity[]
     controlLoop: TickState

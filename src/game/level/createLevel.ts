@@ -12,12 +12,13 @@ export const createLevel = ({ world }: { world: GameWorld }) => {
     // add pegs with colliders
 
     // simple grid
+    const gridScale = 1.2
     times(6, (y) => {
         times(6, (x) => {
-            const offset = y % 2 === 0 ? 0 : 1
-            const tx = x - 3 + offset
-            const ty = y - 3
-            addPeg({ world, x: tx, y: ty })
+            const offset = y % 2 === 0 ? 0 : 0.5
+            const tx = x - 3 + offset + gridScale - 1
+            const ty = y - 2.7
+            addPeg({ world, x: tx * gridScale, y: ty * gridScale })
         })
     })
 
@@ -27,7 +28,7 @@ export const createLevel = ({ world }: { world: GameWorld }) => {
 }
 
 export const addWalls = ({ world }: { world: GameWorld }) => {
-    const { scene, unitsWide, unitsTall, physicsEngine } = world
+    const { scene, unitsWide, unitsTall, physicsEngine, physicsScale } = world
 
     const tex = Textures.getPathTexture(scene, 'walls-texture', {
         src: 'img/walls.png'
@@ -59,23 +60,21 @@ export const addWalls = ({ world }: { world: GameWorld }) => {
     const leftId = `left-${id}`
     const rightId = `right-${id}`
 
-    const wallWidth = 0.25
+    const wallWidth = 0.008 * physicsScale
 
     const bodyLeft = Physics.getBodyType(physicsEngine.world, 'rectangle', leftId, {
-        x: -unitsWide / 2 + 0.5,
-        // y: -unitsTall / 2,
-        y:0,
-        width: wallWidth,
+        x: (-unitsWide * physicsScale) / 2,
+        y: 0,
+        width: wallWidth * physicsScale,
         isStatic: true,
-        height: unitsTall
+        height: unitsTall * physicsScale
     })
     const bodyRight = Physics.getBodyType(physicsEngine.world, 'rectangle', rightId, {
-        x: unitsWide / 2 - 0.5,
-        // y: -unitsTall / 2,
-        y:0,
-        width: wallWidth,
+        x: (unitsWide * physicsScale) / 2,
+        y: 0,
+        width: wallWidth * physicsScale,
         isStatic: true,
-        height: unitsTall
+        height: unitsTall * physicsScale
     })
 }
 

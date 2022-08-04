@@ -12,7 +12,7 @@ import { projectileHitsBubbleSystem } from './projectileHitsBubbleSystem'
 
 export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): Ticker[] => {
     return [
-        placeTowerAtPointerClickSystem({ world, addDestructor }),
+        // placeTowerAtPointerClickSystem({ world, addDestructor }),
         moveEntityToDestinationSystem({ world, addDestructor }),
         bubbleSpawnSystem({ world }),
         bubbleReachedTopSystem({ world }),

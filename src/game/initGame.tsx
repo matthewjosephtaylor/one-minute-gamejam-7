@@ -1,20 +1,21 @@
-import { createScene } from './createScene'
-import { addGameSystems } from './system/addGameSystems'
-import { GameWorld } from './GameWorld'
-import { AddDestructor } from './system/keyboardHandlerSystem'
-import { Ticks } from '../engine/tick'
-import { addControlSystems } from './system/addControlSystems'
-import { setupCameraTopDown } from './camera/setupCameraTopDown'
-import { addDebugMeshes } from './addDebugMeshes'
+import { tuple2 } from '../engine/object'
 import { Physics } from '../engine/physics-2d'
+import { Ticks } from '../engine/tick'
+import { setupCameraTopDown } from './camera/setupCameraTopDown'
+import { createScene } from './createScene'
+import { GameWorld } from './GameWorld'
 import { createLevel } from './level/createLevel'
+import { addControlSystems } from './system/addControlSystems'
+import { addGameSystems } from './system/addGameSystems'
+import { AddDestructor } from './system/keyboardHandlerSystem'
 
 export const initGame = (canvas: HTMLCanvasElement) => {
     const scene = createScene(canvas)
 
     const physicsEngine = Physics.createEngine({
         gravity: {
-            y: 0.000001
+            // y: 0.000001
+            y: 0.0001
         }
     })
 
@@ -50,6 +51,7 @@ export const initGame = (canvas: HTMLCanvasElement) => {
         debug: false,
         scene,
         physicsEngine,
+        physicsScale: 100,
         unitsWide: 9,
         unitsTall: 9,
         entities: [],
@@ -68,7 +70,7 @@ export const initGame = (canvas: HTMLCanvasElement) => {
     // TODO this should happen via UI interaction not on start
     createLevel({ world })
 
-    return () => {
+    return tuple2(() => {
         destructors.forEach((destructor) => destructor())
-    }
+    }, world)
 }
