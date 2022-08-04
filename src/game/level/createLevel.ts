@@ -58,7 +58,6 @@ export const addWalls = ({ world }: { world: GameWorld }) => {
     const leftId = `left-${id}`
     const rightId = `right-${id}`
 
-    // const wallWidth = 0.25 * physicsScale
     const wallWidth = 0.008 * physicsScale
 
     const bodyLeft = Physics.getBodyType(physicsEngine.world, 'rectangle', leftId, {
