@@ -18,58 +18,66 @@ export const areaAttackSystem = ({ world }: { world: GameWorld }) => {
         entities
             .filter((e) => e.type === 'tower' && e.attack === 'area')
             .forEach((entity) => {
-                const { mesh, range = 0, attackTextureSrc, animation } = entity
+                const { mesh, range = 0, attackTextureSrc, animation, fireRateTicks = 0 } = entity
 
                 entity.cooldownTicks -= 1
                 if (entity.cooldownTicks > 0) {
                     return
                 }
+                entity.cooldownTicks = fireRateTicks
 
-                const bubblesWithinRange = bubblePositions.sort((a, b) => sortEntitiesByDistanceFromTarget(a, b, mesh.position))
+                const sortedBubbles = bubblePositions.sort((a, b) => sortEntitiesByDistanceFromTarget(a, b, mesh.position))
 
-                const closest = first(bubblesWithinRange)
-                if (isUndefined(closest)) {
-                    return
-                }
-                if (Maths.distance2(entityToPosition2(closest), entityToPosition2(entity)) > range) {
-                    return
-                }
+                // const closest = first(bubblesWithinRange)
+                // if (isUndefined(closest)) {
+                //     return
+                // }
 
-                // run the attack texture animation
-                if (isUndefined(animation) && isDefined(attackTextureSrc)) {
-                    const tex = Textures.getPathTexture(scene, `${attackTextureSrc}-texture`, { src: attackTextureSrc })
-                    const mat = Materials.getMaterial(scene, `${attackTextureSrc}-material`, {
-                        emissiveTexture: tex.name,
-                        opacityTexture: tex.name
+                // if (Maths.distance2(entityToPosition2(closest), entityToPosition2(entity)) > range) {
+                //     return
+                // }
+
+                sortedBubbles
+                    .filter((bubble) => {
+                        return Maths.distance2(entityToPosition2(bubble), entityToPosition2(entity)) <= range
                     })
-                    const id = `${entity.id}-area-attack`
-                    const mesh = Meshes.getBox(scene, id, {
-                        // position: [xOf(entity.mesh.position), 50, yOf(entity.mesh.position)],
-                        position: entity.mesh.position,
-                        // color: 'red',
-                        width: range * 2,
-                        height: range * 2,
-                        depth: range * 2,
-                        material: mat.name
-                    })
-                    // mat.wireframe = true
-                    mesh.rotation = v3(0, Math.PI / 2, 0)
+                    .forEach((bubble) => {
+                        // run the attack texture animation
+                        if (isUndefined(animation) && isDefined(attackTextureSrc)) {
+                            const tex = Textures.getPathTexture(scene, `${attackTextureSrc}-texture`, { src: attackTextureSrc })
+                            const mat = Materials.getMaterial(scene, `${attackTextureSrc}-material`, {
+                                emissiveTexture: tex.name,
+                                opacityTexture: tex.name
+                            })
+                            const id = `${entity.id}-area-attack`
+                            const mesh = Meshes.getBox(scene, id, {
+                                // position: [xOf(entity.mesh.position), 50, yOf(entity.mesh.position)],
+                                position: entity.mesh.position,
+                                // color: 'red',
+                                width: range * 2,
+                                height: range * 2,
+                                depth: range * 2,
+                                material: mat.name
+                            })
+                            // mat.wireframe = true
+                            mesh.rotation = v3(0, Math.PI / 2, 0)
 
-                    GameWorlds.addEntity(world, {
-                        id,
-                        mesh,
-                        type: 'aoe'
-                    })
-                    const startTick = tick
-                    entity.animation = (tick) => {
-                        if (tick.tickCount - startTick.tickCount > 60) {
-                            GameWorlds.removeEntity(world, id)
-                            delete entity.animation
+                            GameWorlds.addEntity(world, {
+                                id,
+                                mesh,
+                                type: 'aoe'
+                            })
+                            const startTick = tick
+                            entity.animation = (tick) => {
+                                if (tick.tickCount - startTick.tickCount > 5) {
+                                    GameWorlds.removeEntity(world, id)
+                                    delete entity.animation
+                                }
+                            }
                         }
-                    }
-                }
 
-                popBubble({ world, bubble: closest })
+                        popBubble({ world, bubble })
+                    })
 
                 // entity.cooldownTicks = fireRateTicks
                 // fireAtTarget({ from: mesh.position, target: closest.mesh.position, world })

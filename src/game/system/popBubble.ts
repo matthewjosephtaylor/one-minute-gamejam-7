@@ -11,8 +11,10 @@ import { times } from '../../engine/object'
 
 export const popBubble = ({ world, bubble, sound = true }: { world: GameWorld; bubble: GameEntity; sound?: boolean }) => {
     const { soundCtx } = world
-    const sfx = Randoms.pickRandom(SFX_SOURCES.filter((sfx) => /bubble_pop/.test(sfx)))
-    Sounds.playNote({ ctx: soundCtx, instrument: 'sampler', voice: sfx })
+    if (sound) {
+        const sfx = Randoms.pickRandom(SFX_SOURCES.filter((sfx) => /bubble_pop/.test(sfx)))
+        Sounds.playNote({ ctx: soundCtx, instrument: 'sampler', voice: sfx })
+    }
     GameWorlds.removeEntity(world, bubble.id)
     const { addMoney, bubbleReward } = useGeneralState.getState()
     addMoney(bubbleReward)

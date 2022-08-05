@@ -7,9 +7,7 @@ import { popBubble } from './popBubble'
 
 export const bubbleReachedTopSystem = ({ world }: { world: GameWorld }) => {
     return (tick: Tick) => {
-        const { addScore } = useGeneralState.getState()
-        const { unitsTall, entities, soundCtx } = world
-        // TODO match up wavetop to art
+        const { unitsTall, entities } = world
         const WAVE_TOP = -(unitsTall / 2) * 1.1
         entities
             .filter((e) => e.type === 'bubble')
