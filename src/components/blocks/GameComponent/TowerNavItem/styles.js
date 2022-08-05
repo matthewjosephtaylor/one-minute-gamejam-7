@@ -23,6 +23,12 @@ export const TowerNavItem = styled.div`
                 left: 0;
             }
         `}
+    ${({ active }) =>
+        !active &&
+        css`
+            pointer-events: none;
+            opacity: 0.3;
+        `}
 `
 
 export const Cost = styled.div`
