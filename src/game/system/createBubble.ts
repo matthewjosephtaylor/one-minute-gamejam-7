@@ -6,6 +6,9 @@ import { GameWorlds } from '../GameWorlds'
 import { Physics } from '../../engine/physics-2d'
 import { Images } from '../../engine/image'
 import { createCanvas } from '../../engine/babs/createCanvas'
+import { Tick } from '../../engine/tick'
+import { Noises } from '../../engine/noise'
+import useGeneralState from '../../state/generalState'
 
 export const createBubble = async ({
     world,
@@ -21,6 +24,7 @@ export const createBubble = async ({
     invulnerable?: boolean
 }) => {
     const { scene, unitsTall, physicsScale, physicsEngine } = world
+    const { bubbleWiggleChance, bubbleWiggleForce } = useGeneralState.getState()
     const image = await Images.loadHTMLImageElement('img/bubble.svg')
 
     const cvs = createCanvas({ width: image.naturalWidth, height: image.naturalHeight })
@@ -56,6 +60,14 @@ export const createBubble = async ({
         frictionStatic: 0
     })
 
+    const animation = (tick: Tick) => {
+        if (Math.random() < bubbleWiggleChance) {
+            const wiggle = Noises.simplex2(x, y) * bubbleWiggleForce
+            const force = Math.random() * wiggle * 2 - wiggle
+            Physics.applyForce(physicsEngine.world, id, [force, 0])
+        }
+    }
+
     GameWorlds.addEntity(world, {
         id,
         mesh,
@@ -63,6 +75,7 @@ export const createBubble = async ({
         collisionRadius: size,
         physicsBody,
         bubbleSize,
-        invulnerable
+        invulnerable,
+        animation
     })
 }
