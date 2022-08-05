@@ -16,6 +16,7 @@ export const ScoreDisplay = styled.div`
     font-size: 26px;
     line-height: 28px;
     letter-spacing: 0px;
+    pointer-events: none;
     text-align: center;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 `

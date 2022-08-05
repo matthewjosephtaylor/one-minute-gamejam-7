@@ -3,8 +3,9 @@ import useGeneralState from '@/state/generalState'
 
 const TowerNavItem = ({ draggable, onDragStart, icon, cost }) => {
     const { money } = useGeneralState((state) => state)
+    const active = cost <= money
     return (
-        <S.TowerNavItem draggable={draggable} onDragStart={onDragStart} icon={icon} active={cost <= money}>
+        <S.TowerNavItem draggable={draggable && active} onDragStart={onDragStart} icon={icon} active={active}>
             <S.Cost>{cost}</S.Cost>
         </S.TowerNavItem>
     )

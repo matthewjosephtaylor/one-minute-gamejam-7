@@ -56,4 +56,5 @@ export const Label = styled.div`
     letter-spacing: 0px;
     text-align: center;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+    pointer-events: none;
 `
