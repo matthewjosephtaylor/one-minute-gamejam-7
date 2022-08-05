@@ -17,7 +17,9 @@ export const TOWERS: Record<string, Tower> = {
         range: 0.6,
         visualSize: 0.75,
         colliderSize: 0.5,
-        attack: 'area'
+        attackTextureSrc: 'img/spike_nova.png',
+        attack: 'area',
+        fireRateTicks: 60
     },
     urchin: {
         textureSrc: 'img/urchin.png',
