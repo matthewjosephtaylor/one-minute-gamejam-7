@@ -83,10 +83,10 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
     world.entities.push({
         id,
         mesh,
-        range: 2,
         type: 'tower',
         fireRateTicks: 60,
-        physicsBody
+        physicsBody,
+        ...tower
     })
 
     removeMoney(cost)

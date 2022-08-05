@@ -4,16 +4,19 @@ export const TOWERS: Record<string, Tower> = {
     clam: {
         textureSrc: 'img/clam.png',
         cost: 10,
-        range: 3
+        range: 3,
+        attack: 'fire'
     },
     coral: {
         textureSrc: 'img/coral.png',
         cost: 20,
-        range: 3
+        range: 0.5,
+        attack: 'area'
     },
     urchin: {
         textureSrc: 'img/urchin.png',
         cost: 40,
-        range: 3
+        range: 2,
+        attack: 'area'
     }
 }

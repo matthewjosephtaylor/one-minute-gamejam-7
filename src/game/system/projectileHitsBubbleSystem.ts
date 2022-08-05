@@ -1,10 +1,8 @@
-import { Randoms } from '../../engine/random'
-import { Sounds } from '../../engine/sound'
 import { Tick } from '../../engine/tick'
 import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
-import { SFX_SOURCES } from "../SFX_SOURCES"
 import { entityDistance2 } from '../calculation/entityDistance2'
+import { popBubble } from './popBubble'
 
 export const projectileHitsBubbleSystem = ({ world }: { world: GameWorld }) => {
     return (tick: Tick) => {
@@ -23,9 +21,7 @@ export const projectileHitsBubbleSystem = ({ world }: { world: GameWorld }) => {
                 // TODO popped bubble (score, sound, etc) for now just destroy
 
                 collided.forEach((bubble) => {
-                    const sfx = Randoms.pickRandom(SFX_SOURCES.filter((sfx) => /bubble_pop/.test(sfx)))
-                    Sounds.playNote({ ctx: soundCtx, instrument: 'sampler', voice: sfx })
-                    GameWorlds.removeEntity(world, bubble.id)
+                    popBubble({ world, bubble })
                     GameWorlds.removeEntity(world, projectile.id)
                 })
             })

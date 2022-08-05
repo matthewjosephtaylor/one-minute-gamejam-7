@@ -2,10 +2,11 @@ import { AbstractMesh } from 'babylonjs'
 import { Vec3 } from '../engine/math'
 
 import { Body } from 'matter-js'
+import { Tower } from './tower/Tower'
 
 export type EntityType = 'bubble' | 'tower' | 'peg' | 'projectile' | 'environment'
 
-export type GameEntity = {
+export type GameEntity = Partial<Tower> & {
     id: string
     mesh: AbstractMesh
     physicsBody?: Body
