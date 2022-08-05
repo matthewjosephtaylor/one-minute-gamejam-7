@@ -10,7 +10,7 @@ const useGeneralState = create((set) => ({
     musicVolume: 80,
     menuOpen: true,
     placementTime: 5,
-    gameTime: 10,
+    gameTime: 60,
     placementPhase: false,
     gamePhase: false,
     endPhase: false,
@@ -27,6 +27,7 @@ const useGeneralState = create((set) => ({
     setSFXVolume: (sfxVolume) => set((state) => ({ ...state, sfxVolume: clamp(sfxVolume, 0, 100) })),
     setMusicVolume: (musicVolume) => set((state) => ({ ...state, musicVolume: clamp(musicVolume, 0, 100) })),
     addScore: (value) => set((state) => ({ ...state, score: state.score + value })),
+    addMoney: (value) => set((state) => ({ ...state, money: state.money + value })),
     removeMoney: (value) => set((state) => ({ ...state, money: state.money - value })),
     closeEndScreen: () => set((state) => ({ ...state, endPhase: false }))
 }))
