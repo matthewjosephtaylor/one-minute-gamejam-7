@@ -32,4 +32,14 @@ export const popBubble = ({ world, bubble, sound = true }: { world: GameWorld; b
             createBubble({ world, bubbleSize: bubbleSize - 1, x: xr, y: zr })
         })
     }
+    if (bubbleSize === 1) {
+        const [x, _, z] = toVec3(bubble.mesh.position)
+        const { maxMiniBubbles, miniBubbleWiggle: wiggle, bubbleDustSize } = useGeneralState.getState()
+        const miniBubbleCount = Math.floor(Math.random() * maxMiniBubbles)
+        times(miniBubbleCount, () => {
+            const xr = random() * 2 * wiggle - wiggle + x
+            const zr = random() * 2 * wiggle - wiggle + z
+            createBubble({ world, bubbleSize: bubbleDustSize, x: xr, y: zr, invulnerable: true })
+        })
+    }
 }

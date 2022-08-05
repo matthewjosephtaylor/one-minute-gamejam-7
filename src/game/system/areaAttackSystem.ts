@@ -13,7 +13,9 @@ export const areaAttackSystem = ({ world }: { world: GameWorld }) => {
     return (tick: Tick) => {
         const { entities, scene } = world
 
-        const bubblePositions = entities.filter((e) => e.type === 'bubble')
+        const bubblePositions = entities
+            .filter((e) => e.type === 'bubble')
+            .filter((e) => !(e.invulnerable ?? false))
 
         entities
             .filter((e) => e.type === 'tower' && e.attack === 'area')

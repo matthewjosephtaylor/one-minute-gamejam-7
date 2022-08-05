@@ -20,6 +20,7 @@ const useGeneralState = create((set) => ({
     maxMiniBubbles: 5,
     miniBubbleWiggle: 0.1,
     floatStrength: 0.0002,
+    bubbleDustSize: 0.3,
     addHighScore: (score) => {
         return set((state) => ({ ...state, highScores: [...state.highScores, score], lastHighScore: score }))
     },

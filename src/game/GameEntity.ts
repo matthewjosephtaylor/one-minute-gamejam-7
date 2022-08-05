@@ -27,6 +27,7 @@ export type GameEntity = Partial<Tower> & {
     collisionRadius?: number
 
     bubbleSize?: number
+    invulnerable?: boolean
 
     range?: number // how far the tower can shoot
 
