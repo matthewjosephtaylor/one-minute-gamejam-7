@@ -69,7 +69,9 @@ export const EndScore = styled.div`
     text-align: center;
     text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 `
-export const HighScores = styled.div``
+export const HighScores = styled.div`
+    color: #fff;
+`
 export const Score = styled.div`
     color: #fff;
     padding: 0;
