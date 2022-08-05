@@ -27,6 +27,7 @@ const useGeneralState = create((set) => ({
     setSFXVolume: (sfxVolume) => set((state) => ({ ...state, sfxVolume: clamp(sfxVolume, 0, 100) })),
     setMusicVolume: (musicVolume) => set((state) => ({ ...state, musicVolume: clamp(musicVolume, 0, 100) })),
     addScore: (value) => set((state) => ({ ...state, score: state.score + value })),
+    removeMoney: (value) => set((state) => ({ ...state, money: state.money - value })),
     closeEndScreen: () => set((state) => ({ ...state, endPhase: false }))
 }))
 

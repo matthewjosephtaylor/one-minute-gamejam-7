@@ -5,14 +5,19 @@ import { first, isUndefined } from '../../engine/object'
 import { Physics } from '../../engine/physics-2d'
 import { Randoms } from '../../engine/random'
 import { Sounds } from '../../engine/sound'
+import useGeneralState from '../../state/generalState'
 import { GameWorld } from '../GameWorld'
-import { SFX_SOURCES } from "../SFX_SOURCES"
+import { SFX_SOURCES } from '../SFX_SOURCES'
 import { isTowerAtPosition } from '../system/isTowerAtPosition'
 import { sortEntitiesByDistanceFromTarget } from '../system/sortEntitiesByDistanceFromTarget'
 import { TOWERS } from './TOWERS'
 
 export const placeTowerAtMousePosition = ({ world, position, towerName }: { world: GameWorld; position: Vec2; towerName: string }) => {
     const { entities, physicsScale, scene, physicsEngine, soundCtx } = world
+
+    const { money, removeMoney } = useGeneralState.getState()
+
+    console.log({ money })
     const [x, y] = position
     const tower = TOWERS[towerName]
     if (isUndefined(tower)) {
@@ -20,19 +25,18 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
         throw new Error(`No such tower: '${towerName}'`)
     }
 
-    const pick = first(
-        Meshes.pickMeshes(scene, x, y, {
-            // a bit hacky, ideally need to add metadata to mesh, but this works for now
-            // predicate: (mesh) => mesh.id.startsWith('peg')
-        })
-    )
+    const pick = first(Meshes.pickMeshes(scene, x, y))
     if (isUndefined(pick)) {
         return
     }
 
     const [px, py, pz] = toVec3(pick.pickedPoint)
 
-    const { textureSrc } = tower
+    const { textureSrc, cost } = tower
+
+    if (cost > money) {
+        return
+    }
 
     const id = `tower-${x},${y}`
 
@@ -85,6 +89,7 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
         physicsBody
     })
 
+    removeMoney(cost)
     const sfx = Randoms.pickRandom(SFX_SOURCES.filter((sfx) => /tower_placement/.test(sfx)))
     Sounds.playNote({ ctx: soundCtx, instrument: 'sampler', voice: sfx })
 }
