@@ -10,10 +10,18 @@ import { Physics } from '../../engine/physics-2d'
 import { Images } from '../../engine/image'
 import { createCanvas } from '../../engine/babs/createCanvas'
 import { v3 } from '../../engine/babs/v3'
+import generalState from '../../state/generalState'
 
 export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
     return async (tick: Tick) => {
         const { scene, unitsWide, unitsTall, entities, physicsEngine, physicsScale } = world
+
+        const { gamePhase, endPhase } = generalState.getState()
+        // console.log(`gp: ${gamePhase} ep: ${endPhase}`)
+        if (!gamePhase && !endPhase) {
+            return
+        }
+
         // TODO spawn rate for bubbles
         if (entities.filter((e) => e.type === 'bubble').length > 10) {
             return

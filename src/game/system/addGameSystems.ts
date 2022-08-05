@@ -9,6 +9,8 @@ import { fireAtBubblesSystem } from './fireAtBubblesSystem'
 import { updateEntityFromPhysicsSystem } from './updateEntityFromPhysicsSystem'
 import { updatePhysicsSystem } from './updatePhysicsSystem'
 import { projectileHitsBubbleSystem } from './projectileHitsBubbleSystem'
+import { gameOverSystem } from './gameOverSystem'
+import { gameStartSystem } from './gameStartSystem'
 
 export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): Ticker[] => {
     return [
@@ -19,6 +21,8 @@ export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): 
         updatePhysicsSystem({ world }),
         updateEntityFromPhysicsSystem({ world }),
         fireAtBubblesSystem({ world }),
-        projectileHitsBubbleSystem({ world })
+        projectileHitsBubbleSystem({ world }),
+        gameOverSystem({ world }),
+        gameStartSystem({ world })
     ]
 }

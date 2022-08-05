@@ -18,6 +18,7 @@ export const createSoundCtx = async (spec: Partial<SoundSetupSpec> = {}): Promis
     const samplers = Objects.fromEntries(
         Objects.entries(sampleMap).map(([key, url]) => {
             const volume = new Volume().toDestination()
+            volume.mute = true
             const sampler = new Sampler({
                 urls: {
                     C4: url
@@ -39,6 +40,7 @@ export const createSoundCtx = async (spec: Partial<SoundSetupSpec> = {}): Promis
         Objects.entries(audioMap).map((entry) => {
             const [key, url] = entry
             const volume = new Volume(12).toDestination()
+            volume.mute = true
             const player = new Player(url).connect(volume)
             volumes[key] = volume
             return [key, player]

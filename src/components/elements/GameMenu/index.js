@@ -4,6 +4,7 @@ import * as S from './styles'
 import useGeneralState from '@/state/generalState'
 import MenuButton from './MenuButton'
 import VolumeScrubber from '../VolumeScrubber'
+import { Sounds } from '@/engine/sound'
 
 const GameMenu = () => {
     const {
@@ -51,7 +52,14 @@ const GameMenu = () => {
                                     Resume
                                 </MenuButton>
                             ) : (
-                                <MenuButton onClick={startGame}>Start Game</MenuButton>
+                                <MenuButton
+                                    onClick={async () => {
+                                        await Sounds.ready()
+                                        startGame()
+                                    }}
+                                >
+                                    Start Game
+                                </MenuButton>
                             )}
                             <MenuButton>High Scores</MenuButton>
                             <MenuButton

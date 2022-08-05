@@ -1,7 +1,6 @@
 import { tuple2 } from '../engine/object'
 import { Physics } from '../engine/physics-2d'
 import { Sounds, SoundSampleMap } from '../engine/sound'
-import { SoundCtx } from '../engine/sound/type/SoundCtx'
 import { Ticks } from '../engine/tick'
 import useGeneralState from '../state/generalState'
 import { setupCameraTopDown } from './camera/setupCameraTopDown'
@@ -14,6 +13,7 @@ import { SFX_SOURCES } from './SFX_SOURCES'
 import { addControlSystems } from './system/addControlSystems'
 import { addGameSystems } from './system/addGameSystems'
 import { AddDestructor } from './system/keyboardHandlerSystem'
+import { updateVolumes } from './updateVolumes'
 
 export const initGame = async (canvas: HTMLCanvasElement) => {
     const scene = createScene(canvas)
@@ -92,49 +92,16 @@ export const initGame = async (canvas: HTMLCanvasElement) => {
     // TODO this should happen via UI interaction not on start
     createLevel({ world })
 
-    useGeneralState.subscribe(({ sfxVolume, musicVolume }) => {
+    useGeneralState.subscribe(async ({ sfxVolume, musicVolume }) => {
         updateVolumes({ sfxVolume, musicVolume, ctx })
     })
 
     // set initial volume
-    updateVolumes({ ctx, ...useGeneralState.getState() })
+    // updateVolumes({ ctx, ...useGeneralState.getState() })
 
     destructors.push(playMusic(ctx))
 
     return tuple2(() => {
         destructors.forEach((destructor) => destructor())
     }, world)
-}
-
-export const updateVolumes = ({
-    musicVolume,
-    sfxVolume,
-    ctx,
-    minDecibels = -20,
-    maxDecibels = 30
-}: {
-    ctx: SoundCtx
-    sfxVolume: number
-    musicVolume: number
-    maxDecibels?: number
-    minDecibels?: number
-}) => {
-    MUSIC_SOURCES.forEach((track) => {
-        if (musicVolume === 0) {
-            ctx.volumes[track].mute = true
-            return
-        }
-        const volume = minDecibels + (musicVolume / 100) * maxDecibels
-        ctx.volumes[track].mute = false
-        ctx.volumes[track].volume.value = volume
-    })
-    SFX_SOURCES.forEach((sfx) => {
-        if (sfxVolume === 0) {
-            ctx.volumes[sfx].mute = true
-            return
-        }
-        const volume = minDecibels + (sfxVolume / 100) * maxDecibels
-        ctx.volumes[sfx].mute = false
-        ctx.volumes[sfx].volume.value = volume
-    })
 }
