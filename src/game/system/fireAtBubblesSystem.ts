@@ -4,7 +4,6 @@ import { Tick } from '../../engine/tick'
 import { entityToPosition2 } from '../calculation/entityToPosition2'
 import { GameWorld } from '../GameWorld'
 import { fireAtTarget } from './fireAtTarget'
-import { popBubble } from './popBubble'
 import { sortEntitiesByDistanceFromTarget } from './sortEntitiesByDistanceFromTarget'
 
 export const fireAtBubblesSystem = ({ world }: { world: GameWorld }) => {
@@ -39,36 +38,4 @@ export const fireAtBubblesSystem = ({ world }: { world: GameWorld }) => {
     }
 }
 
-export const areaAttackSystem = ({ world }: { world: GameWorld }) => {
-    return (tick: Tick) => {
-        const { entities } = world
 
-        const bubblePositions = entities.filter((e) => e.type === 'bubble')
-
-        entities
-            .filter((e) => e.type === 'tower' && e.attack === 'area')
-            .forEach((entity) => {
-                const { mesh, range = 0 } = entity
-
-                entity.cooldownTicks -= 1
-                if (entity.cooldownTicks > 0) {
-                    return
-                }
-
-                const bubblesWithinRange = bubblePositions.sort((a, b) => sortEntitiesByDistanceFromTarget(a, b, mesh.position))
-
-                const closest = first(bubblesWithinRange)
-                if (isUndefined(closest)) {
-                    return
-                }
-                if (Maths.distance2(entityToPosition2(closest), entityToPosition2(entity)) > range) {
-                    return
-                }
-
-                popBubble({ world, bubble: closest })
-
-                // entity.cooldownTicks = fireRateTicks
-                // fireAtTarget({ from: mesh.position, target: closest.mesh.position, world })
-            })
-    }
-}

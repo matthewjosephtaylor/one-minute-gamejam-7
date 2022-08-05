@@ -3,8 +3,9 @@ import { Vec3 } from '../engine/math'
 
 import { Body } from 'matter-js'
 import { Tower } from './tower/Tower'
+import { Tick } from '../engine/tick'
 
-export type EntityType = 'bubble' | 'tower' | 'peg' | 'projectile' | 'environment'
+export type EntityType = 'bubble' | 'tower' | 'peg' | 'projectile' | 'environment' | 'aoe'
 
 export type GameEntity = Partial<Tower> & {
     id: string
@@ -26,4 +27,6 @@ export type GameEntity = Partial<Tower> & {
     collisionRadius?: number
 
     range?: number // how far the tower can shoot
+
+    animation?: (tick: Tick) => void
 }

@@ -1,4 +1,4 @@
-import { Materials, Meshes } from '../../engine/babs'
+import { Materials, Meshes, Textures } from '../../engine/babs'
 import { v3 } from '../../engine/babs/v3'
 import { Colors } from '../../engine/color'
 import { Point3, toVec3, xOf, zOf } from '../../engine/math'
@@ -6,17 +6,23 @@ import { Randoms } from '../../engine/random'
 import { Sounds } from '../../engine/sound'
 import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
-import { SFX_SOURCES } from "../SFX_SOURCES"
+import { SFX_SOURCES } from '../SFX_SOURCES'
 
 export const fireAtTarget = ({ world, target, from }: { world: GameWorld; from: Point3; target: Point3 }) => {
     const { scene, soundCtx } = world
     const id = `projectile-${Randoms.randomUuid()}`
 
-    const mat = Materials.getMaterial(scene, 'projectile-material')
+    const tex = Textures.getPathTexture(scene, 'projectile-texture', {
+        src: 'img/pearl.png'
+    })
+    const mat = Materials.getMaterial(scene, 'projectile-material', {
+        emissiveTexture: tex.name,
+        opacityTexture: tex.name
+    })
 
     const mesh = Meshes.getBox(scene, id, {
-        position: from,
-        color: Colors.from('yellow').toString(),
+        position: [xOf(from), 40, zOf(from)],
+        // color: Colors.from('yellow').toString(),
         material: mat.name,
         width: 0.1,
         height: 0.1,

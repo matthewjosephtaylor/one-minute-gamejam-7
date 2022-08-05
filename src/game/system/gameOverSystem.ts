@@ -10,7 +10,7 @@ export const gameOverSystem = ({ world }: { world: GameWorld }) => {
         if (endPhase) {
             // remove all towers
             entities
-                .filter((e) => e.type === 'projectile' || e.type === 'tower')
+                .filter((e) => ['projectile', 'tower', 'aoe'].includes(e.type))
                 .forEach((entity) => {
                     GameWorlds.removeEntity(world, entity.id)
                 })

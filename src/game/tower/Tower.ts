@@ -5,6 +5,7 @@ export type Tower = {
     cost: number
     range: number
     attack: Attack
+    attackTextureSrc?: string
     visualSize: number
     colliderSize: number
 }

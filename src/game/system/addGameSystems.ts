@@ -5,12 +5,14 @@ import { bubbleSpawnSystem } from './bubbleSpawnSystem'
 import { AddDestructor } from './keyboardHandlerSystem'
 import { moveEntityToDestinationSystem } from './moveEntityToDestinationSystem'
 import { placeTowerAtPointerClickSystem } from './placeTowerAtPointerClickSystem'
-import { areaAttackSystem, fireAtBubblesSystem } from './fireAtBubblesSystem'
+import { fireAtBubblesSystem } from './fireAtBubblesSystem'
+import { areaAttackSystem } from './areaAttackSystem'
 import { updateEntityFromPhysicsSystem } from './updateEntityFromPhysicsSystem'
 import { updatePhysicsSystem } from './updatePhysicsSystem'
 import { projectileHitsBubbleSystem } from './projectileHitsBubbleSystem'
 import { gameOverSystem } from './gameOverSystem'
 import { gameStartSystem } from './gameStartSystem'
+import { animationSystem } from './animationSystem'
 
 export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): Ticker[] => {
     return [
@@ -24,6 +26,7 @@ export const addGameSystems = (world: GameWorld, addDestructor: AddDestructor): 
         projectileHitsBubbleSystem({ world }),
         gameOverSystem({ world }),
         gameStartSystem({ world }),
-        areaAttackSystem({ world })
+        areaAttackSystem({ world }),
+        animationSystem({ world })
     ]
 }
