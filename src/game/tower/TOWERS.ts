@@ -13,7 +13,7 @@ export const TOWERS: Record<string, Tower> = {
     },
     urchin: {
         textureSrc: 'img/urchin.png',
-        cost: 30,
+        cost: 40,
         range: 3
     }
 }
