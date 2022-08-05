@@ -40,3 +40,20 @@ export const TowerNav = styled.div`
     display: flex;
     gap: 10px;
 `
+
+export const Label = styled.div`
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    text-align: center;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+`
