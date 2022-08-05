@@ -18,6 +18,8 @@ export const GameCanvas = styled.div`
         height: 100%;
         z-index: 20;
         position: relative;
+        outline: none;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     }
 `
 export const Hamburger = styled.div`
