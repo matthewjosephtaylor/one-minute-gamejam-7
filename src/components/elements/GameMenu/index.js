@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import * as S from './styles'
 import useGeneralState from '@/state/generalState'
-import MenuButton from './MenuButton'
+import MenuButton from '../MenuButton'
 import VolumeScrubber from '../VolumeScrubber'
 import { Sounds } from '@/engine/sound'
 
