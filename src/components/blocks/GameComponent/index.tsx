@@ -61,10 +61,11 @@ const GameComponent = () => {
                 {inGame && <><ScoreDisplay />
                 <MoneyDisplay />
                 <TimerDisplay />
+                {placementPhase && <S.Label>Drag the towers<br />to place them</S.Label>}
                 <S.TowerNav>
                     {Object.entries(TOWERS).map((entry, index) => {
                         const [towerName, tower] = entry
-                        const { textureSrc } = tower
+                        const { textureSrc, cost } = tower
 
                         return (
                             <TowerNavItem
@@ -73,6 +74,7 @@ const GameComponent = () => {
                                 onDragStart={(event) => {
                                     event.dataTransfer.setData('text', towerName)
                                 }}
+                                cost={cost}
                                 icon={textureSrc}
                             />
                         )
