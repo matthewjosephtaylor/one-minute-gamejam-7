@@ -2,6 +2,7 @@ import { add2 } from './add2'
 import { distance2 } from './distance2'
 import { divide2 } from './divide2'
 import { divide3 } from './divide3'
+import { lerp } from './lerp'
 import { lerp2 } from './lerp2'
 import { lerp3 } from './lerp3'
 import { normalize2 } from './normalize2'
@@ -28,6 +29,7 @@ export const Maths = {
     subtract3,
     divide2,
     divide3,
+    lerp,
     lerp2,
     lerp3
 }

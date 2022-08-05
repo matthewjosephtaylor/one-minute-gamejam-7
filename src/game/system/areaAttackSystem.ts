@@ -1,7 +1,7 @@
-import { Textures, Materials, Meshes } from '../../engine/babs'
+import { Materials, Meshes, Textures } from '../../engine/babs'
 import { v3 } from '../../engine/babs/v3'
-import { Maths, xOf, yOf } from '../../engine/math'
-import { first, isDefined, isUndefined } from '../../engine/object'
+import { Maths } from '../../engine/math'
+import { isDefined, isUndefined } from '../../engine/object'
 import { Tick } from '../../engine/tick'
 import { entityToPosition2 } from '../calculation/entityToPosition2'
 import { GameWorld } from '../GameWorld'
@@ -13,9 +13,7 @@ export const areaAttackSystem = ({ world }: { world: GameWorld }) => {
     return (tick: Tick) => {
         const { entities, scene } = world
 
-        const bubblePositions = entities
-            .filter((e) => e.type === 'bubble')
-            .filter((e) => !(e.invulnerable ?? false))
+        const bubblePositions = entities.filter((e) => e.type === 'bubble').filter((e) => !(e.invulnerable ?? false))
 
         entities
             .filter((e) => e.type === 'tower' && e.attack === 'area')
@@ -29,15 +27,6 @@ export const areaAttackSystem = ({ world }: { world: GameWorld }) => {
                 entity.cooldownTicks = fireRateTicks
 
                 const sortedBubbles = bubblePositions.sort((a, b) => sortEntitiesByDistanceFromTarget(a, b, mesh.position))
-
-                // const closest = first(bubblesWithinRange)
-                // if (isUndefined(closest)) {
-                //     return
-                // }
-
-                // if (Maths.distance2(entityToPosition2(closest), entityToPosition2(entity)) > range) {
-                //     return
-                // }
 
                 sortedBubbles
                     .filter((bubble) => {
@@ -53,25 +42,29 @@ export const areaAttackSystem = ({ world }: { world: GameWorld }) => {
                             })
                             const id = `${entity.id}-area-attack`
                             const mesh = Meshes.getBox(scene, id, {
-                                // position: [xOf(entity.mesh.position), 50, yOf(entity.mesh.position)],
                                 position: entity.mesh.position,
-                                // color: 'red',
                                 width: range * 2,
                                 height: range * 2,
                                 depth: range * 2,
                                 material: mat.name
                             })
                             // mat.wireframe = true
-                            mesh.rotation = v3(0, Math.PI / 2, 0)
+                            const angle = Math.PI * Math.random()
+                            // mesh.rotation = v3(0, Math.PI / 2, 0)
+                            mesh.rotation = v3(0, angle, 0)
 
                             GameWorlds.addEntity(world, {
                                 id,
                                 mesh,
                                 type: 'aoe'
                             })
+                            const animationTicks = 8
                             const startTick = tick
+                            const endTickCount = tick.tickCount + animationTicks
                             entity.animation = (tick) => {
-                                if (tick.tickCount - startTick.tickCount > 5) {
+                                const scale = Maths.lerp(1, 0, (endTickCount - tick.tickCount) / animationTicks)
+                                mesh.scaling = v3(scale, scale, scale)
+                                if (tick.tickCount - startTick.tickCount > animationTicks) {
                                     GameWorlds.removeEntity(world, id)
                                     delete entity.animation
                                 }
