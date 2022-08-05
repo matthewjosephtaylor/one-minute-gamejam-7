@@ -16,7 +16,7 @@ export const addPeg = ({ world, x, y }: { world: GameWorld; x: number; y: number
     const size = 0.2
 
     const mesh = Meshes.getBox(scene, id, {
-        position: [x, 0, y],
+        position: [x, 20, y],
         width: size,
         // height: size,
         height: 0.001,
