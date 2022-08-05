@@ -8,7 +8,7 @@ export const TimerDisplay = styled.div`
     color: #fff;
     padding: 0 0 0 60px;
     z-index: 50;
-    background-image: url('/img/clock@2x.png');
+    background-image: url('img/clock@2x.png');
     background-size: contain;
     background-position: 0% 0%;
     background-repeat: no-repeat;

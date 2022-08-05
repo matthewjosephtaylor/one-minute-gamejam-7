@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const TowerNavItem = styled.div`
     width: 70px;
     height: 70px;
-    background-image: url('/img/TowerButton@2x.png');
+    background-image: url('img/TowerButton@2x.png');
     background-size: contain;
     background-position: 0% 0%;
     background-repeat: no-repeat;
@@ -38,7 +38,7 @@ export const Cost = styled.div`
     color: #fff;
     padding: 0 0 0 20px;
     z-index: 50;
-    background-image: url('/img/Money@2x.png');
+    background-image: url('img/Money@2x.png');
     background-size: contain;
     background-position: 0% 0%;
     background-repeat: no-repeat;

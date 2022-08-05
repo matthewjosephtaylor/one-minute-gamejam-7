@@ -53,7 +53,6 @@ export const createSoundCtx = async (spec: Partial<SoundSetupSpec> = {}): Promis
         players,
         volumes
     }
-    console.log({ ctx })
     Destination.volume.rampTo(-20)
     await loaded()
     return ctx

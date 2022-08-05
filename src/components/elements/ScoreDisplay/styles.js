@@ -7,7 +7,7 @@ export const ScoreDisplay = styled.div`
     color: #fff;
     padding: 0 0 0 40px;
     z-index: 50;
-    background-image: url('/img/coin@2x.png');
+    background-image: url('img/coin@2x.png');
     background-size: contain;
     background-position: 0% 0%;
     background-repeat: no-repeat;

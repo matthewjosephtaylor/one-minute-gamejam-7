@@ -103,6 +103,8 @@ export const initGame = async (canvas: HTMLCanvasElement) => {
 
     destructors.push(playMusic(ctx))
 
+    console.log("Game Initialized")
+
     return tuple2(() => {
         destructors.forEach((destructor) => destructor())
     }, world)

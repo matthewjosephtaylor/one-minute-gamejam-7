@@ -14,7 +14,7 @@ export const GameMenuWrapper = styled.div`
     z-index: 60;
 `
 export const GameMenu = styled(motion.div)`
-    background-image: url('/img/menu_background@2x.png');
+    background-image: url('img/menu_background@2x.png');
     background-size: contain;
     background-repeat: no-repeat;
     width: 200px;
@@ -39,7 +39,7 @@ export const Close = styled.div`
     right: -10px;
     width: 35px;
     height: 35px;
-    background-image: url('/img/close@2x.png');
+    background-image: url('img/close@2x.png');
     background-size: cover;
     z-index: 30;
     cursor: pointer;

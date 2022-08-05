@@ -21,7 +21,7 @@ export const Plus = styled.div`
     bottom: 9px;
     width: 30px;
     height: 30px;
-    background-image: url('/img/plus@2x.png');
+    background-image: url('img/plus@2x.png');
     background-size: contain;
     cursor: pointer;
     z-index: 20;
@@ -32,7 +32,7 @@ export const Minus = styled.div`
     bottom: 9px;
     width: 30px;
     height: 30px;
-    background-image: url('/img/minus@2x.png');
+    background-image: url('img/minus@2x.png');
     background-size: contain;
     cursor: pointer;
     z-index: 20;
@@ -48,7 +48,7 @@ export const Scrubber = styled.div`
     z-index: 10;
 `
 export const Bar = styled.div`
-    background-image: url('/img/volumeBar@2x.png');
+    background-image: url('img/volumeBar@2x.png');
     height: 20px;
     transition: all 0.25s ease;
     background-size: contain;
