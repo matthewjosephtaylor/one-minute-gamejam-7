@@ -16,8 +16,9 @@ export const popBubble = ({ world, bubble, sound = true }: { world: GameWorld; b
         Sounds.playNote({ ctx: soundCtx, instrument: 'sampler', voice: sfx })
     }
     GameWorlds.removeEntity(world, bubble.id)
-    const { addMoney, bubbleReward } = useGeneralState.getState()
-    addMoney(bubbleReward)
+    const { addMoney, bubbleRewardMoney, bubbleRewardScore, addScore } = useGeneralState.getState()
+    addMoney(bubbleRewardMoney)
+    addScore(bubbleRewardScore)
 
     const { bubbleSize } = bubble
     const random = Math.random

@@ -45,7 +45,6 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
 
     const [pegX, pegY, pegZ] = toVec3(pegPosition)
     if (isTowerAtPosition({ world, position: [pegX, pegZ] })) {
-        console.log(`tower already at ${pegPosition}`)
         return
     }
 
