@@ -21,8 +21,7 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
     const [x, y] = position
     const tower = TOWERS[towerName]
     if (isUndefined(tower)) {
-        console.log({ tower, towerName })
-        throw new Error(`No such tower: '${towerName}'`)
+        return
     }
 
     const pick = first(Meshes.pickMeshes(scene, x, y))
