@@ -8,8 +8,8 @@ export const TOWERS: Record<string, Tower> = {
         visualSize: 0.75,
         colliderSize: 0.5,
         attack: 'fire',
-        fireRateTicks: 30,
-        projectileLifetimeTicks: 60
+        fireRateTicks: 60,
+        projectileLifetimeTicks: 120
     },
     coral: {
         textureSrc: 'img/coral.png',
