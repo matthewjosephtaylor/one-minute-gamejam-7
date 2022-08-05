@@ -4,11 +4,24 @@ import { Colors } from '../../engine/color'
 import { Point3, toVec3, xOf, zOf } from '../../engine/math'
 import { Randoms } from '../../engine/random'
 import { Sounds } from '../../engine/sound'
+import { Tick } from '../../engine/tick'
 import { GameWorld } from '../GameWorld'
 import { GameWorlds } from '../GameWorlds'
 import { SFX_SOURCES } from '../SFX_SOURCES'
 
-export const fireAtTarget = ({ world, target, from }: { world: GameWorld; from: Point3; target: Point3 }) => {
+export const fireAtTarget = ({
+    world,
+    target,
+    from,
+    tick,
+    lifetime
+}: {
+    world: GameWorld
+    from: Point3
+    target: Point3
+    tick: Tick
+    lifetime: number
+}) => {
     const { scene, soundCtx } = world
     const id = `projectile-${Randoms.randomUuid()}`
 
@@ -35,6 +48,7 @@ export const fireAtTarget = ({ world, target, from }: { world: GameWorld; from: 
 
     const sfx = Randoms.pickRandom(SFX_SOURCES.filter((sfx) => /shoot_pearl/.test(sfx)))
     Sounds.playNote({ ctx: soundCtx, instrument: 'sampler', voice: sfx })
+    const startTick = tick
     GameWorlds.addEntity(world, {
         id,
         mesh,
@@ -42,6 +56,11 @@ export const fireAtTarget = ({ world, target, from }: { world: GameWorld; from: 
         destinationRadius: 0.01,
         type: 'projectile',
         speed: 2,
+        animation: (tick) => {
+            if (tick.tickCount - startTick.tickCount > lifetime) {
+                GameWorlds.removeEntity(world, id)
+            }
+        },
         onDestinationReached: () => {
             GameWorlds.removeEntity(world, id)
         }

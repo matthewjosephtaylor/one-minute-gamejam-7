@@ -36,7 +36,6 @@ export const areaAttackSystem = ({ world }: { world: GameWorld }) => {
                 }
 
                 // run the attack texture animation
-                console.log({ animation, attackTextureSrc, entity })
                 if (isUndefined(animation) && isDefined(attackTextureSrc)) {
                     const tex = Textures.getPathTexture(scene, `${attackTextureSrc}-texture`, { src: attackTextureSrc })
                     const mat = Materials.getMaterial(scene, `${attackTextureSrc}-material`, {

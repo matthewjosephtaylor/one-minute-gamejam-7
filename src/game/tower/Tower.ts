@@ -8,4 +8,6 @@ export type Tower = {
     attackTextureSrc?: string
     visualSize: number
     colliderSize: number
+    fireRateTicks?: number
+    projectileLifetimeTicks?: number
 }

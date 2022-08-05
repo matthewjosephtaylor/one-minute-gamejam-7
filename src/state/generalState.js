@@ -5,7 +5,7 @@ const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
 const useGeneralState = create((set) => ({
     score: 0,
     highScores: [],
-    money: 100,
+    money: 250,
     sfxVolume: 80,
     musicVolume: 80,
     menuOpen: true,
@@ -15,6 +15,11 @@ const useGeneralState = create((set) => ({
     gamePhase: false,
     endPhase: false,
     lastHighScore: 0,
+    maxBubbles: 10,
+    bubbleReward: 10,
+    maxMiniBubbles: 5,
+    miniBubbleWiggle: 0.1,
+    floatStrength: 0.0002,
     addHighScore: (score) => {
         return set((state) => ({ ...state, highScores: [...state.highScores, score], lastHighScore: score }))
     },

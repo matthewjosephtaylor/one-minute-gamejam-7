@@ -18,10 +18,12 @@ import { updateVolumes } from './updateVolumes'
 export const initGame = async (canvas: HTMLCanvasElement) => {
     const scene = createScene(canvas)
 
+    const { floatStrength: antiGravityStrength } = useGeneralState.getState()
     const physicsEngine = Physics.createEngine({
         gravity: {
             // y: 0.000001
-            y: 0.0001
+            // y: 0.0001
+            y: antiGravityStrength
         }
     })
 

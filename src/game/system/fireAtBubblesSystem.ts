@@ -15,7 +15,7 @@ export const fireAtBubblesSystem = ({ world }: { world: GameWorld }) => {
         entities
             .filter((e) => e.type === 'tower' && e.attack === 'fire')
             .forEach((entity) => {
-                const { mesh, range = 0, cooldownTicks = 0, fireRateTicks = 30 } = entity
+                const { mesh, range = 0, cooldownTicks = 0, fireRateTicks = 30, projectileLifetimeTicks = 60 } = entity
 
                 entity.cooldownTicks -= 1
                 if (entity.cooldownTicks > 0) {
@@ -33,9 +33,7 @@ export const fireAtBubblesSystem = ({ world }: { world: GameWorld }) => {
                 }
 
                 entity.cooldownTicks = fireRateTicks
-                fireAtTarget({ from: mesh.position, target: closest.mesh.position, world })
+                fireAtTarget({ from: mesh.position, target: closest.mesh.position, world, lifetime: projectileLifetimeTicks, tick })
             })
     }
 }
-
-

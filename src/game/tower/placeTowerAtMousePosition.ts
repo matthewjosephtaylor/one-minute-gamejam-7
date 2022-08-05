@@ -17,7 +17,6 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
 
     const { money, removeMoney } = useGeneralState.getState()
 
-    console.log({ money })
     const [x, y] = position
     const tower = TOWERS[towerName]
     if (isUndefined(tower)) {
@@ -79,7 +78,6 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
         id,
         mesh,
         type: 'tower',
-        fireRateTicks: 60,
         physicsBody,
         ...tower
     })

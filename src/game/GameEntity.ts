@@ -26,6 +26,8 @@ export type GameEntity = Partial<Tower> & {
     // collisions outside of physics
     collisionRadius?: number
 
+    bubbleSize?: number
+
     range?: number // how far the tower can shoot
 
     animation?: (tick: Tick) => void
