@@ -17,7 +17,7 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
         const { maxBubbles } = useGeneralState.getState()
 
         // TODO spawn rate for bubbles
-        if (entities.filter((e) => e.type === 'bubble').length > maxBubbles) {
+        if (entities.filter((e) => e.type === 'bubble' && !(e?.invulnerable ?? false)).length > maxBubbles) {
             return
         }
         if (Math.random() < 0.9) {
@@ -29,5 +29,3 @@ export const bubbleSpawnSystem = ({ world }: { world: GameWorld }) => {
         createBubble({ world, bubbleSize: Randoms.pickRandom([1, 2]), x, y })
     }
 }
-
-
