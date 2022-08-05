@@ -1,4 +1,3 @@
-
 export type Attack = 'fire' | 'area'
 
 export type Tower = {
@@ -6,4 +5,6 @@ export type Tower = {
     cost: number
     range: number
     attack: Attack
+    visualSize: number
+    colliderSize: number
 }

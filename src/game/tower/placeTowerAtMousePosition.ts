@@ -32,7 +32,7 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
 
     const [px, py, pz] = toVec3(pick.pickedPoint)
 
-    const { textureSrc, cost } = tower
+    const { textureSrc, cost, colliderSize, visualSize } = tower
 
     if (cost > money) {
         return
@@ -51,8 +51,6 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
         return
     }
 
-    const size = 0.5
-
     const tex = Textures.getPathTexture(scene, `${towerName}-texture`, { src: textureSrc })
     const mat = Materials.getMaterial(scene, `${towerName}-material`, {
         emissiveTexture: tex.name,
@@ -62,9 +60,9 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
         // position: pegPosition,
         position: [0, 20, 0],
         // color: 'blue',
-        width: size,
-        height: size,
-        depth: size,
+        width: visualSize,
+        height: visualSize,
+        depth: visualSize,
         material: mat.name
     })
     mesh.rotation = v3(0, Math.PI / 2, 0)
@@ -72,9 +70,7 @@ export const placeTowerAtMousePosition = ({ world, position, towerName }: { worl
     const physicsBody = Physics.getBodyType(physicsEngine.world, 'circle', id, {
         x: pegX * physicsScale,
         y: -pegZ * physicsScale,
-        radius: (size / 2) * physicsScale,
-        // width: size,
-        // height: size,
+        radius: (colliderSize / 2) * physicsScale,
         isStatic: true,
         mass: 10,
         frictionAir: 0.05
